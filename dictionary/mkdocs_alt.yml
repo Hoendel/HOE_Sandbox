@@ -1,0 +1,181 @@
+# Project information
+site_name: "Nand - RPG"
+site_description: "Das Rollenspiel auf dem Mars"
+site_author: "hoochicken"
+site_url: "http://127.0.0.1:8000"
+
+# Copyright
+copyright: "&copy; 2025 Mareike Riegel"
+
+# Repository-Informationen
+repo_name: "GitHub"
+repo_url: "https://github.com/hoochicken/nand-rpg/dictionary"
+edit_uri: "https://github.com/hoochicken/nand-rpg/dictionary/edit/main/docs_sample"
+
+# HOE: Dieser Eintrag war falsch und wurde entfernt (nicht gültig auf oberster Ebene)
+# color_mode: dark
+
+# Konfiguration
+docs_dir: "docs_sample"
+
+theme:
+  name: material
+  language: de
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Wechsel zu hellem Modus
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Wechsel zu dunklem Modus
+  features:
+    - navigation.tabs
+    - content.code.copy
+# Project information
+site_name: "Nand - RPG"
+site_description: "Das Rollenspiel auf dem Mars"
+site_author: "hoochicken"
+site_url: "http://127.0.0.1:8000"
+
+# Copyright
+copyright: "© 2025 Mareike Riegel"
+
+# Repository-Informationen
+repo_name: "GitHub"
+repo_url: "https://github.com/hoochicken/nand-rpg/dictionary"
+edit_uri: "https://github.com/hoochicken/nand-rpg/dictionary/edit/main/docs_sample"
+
+# Dokumentationsverzeichnis
+docs_dir: "docs_sample"
+
+# Theme-Konfiguration
+theme:
+  name: material
+  language: de
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: red
+      accent: orange
+      toggle:
+        icon: material/brightness-4
+        name: Wechsel zu hellem Modus
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: red
+      accent: orange
+      toggle:
+        icon: material/brightness-7
+        name: Wechsel zu dunklem Modus
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-\.]+'
+      lang:
+        - de
+  - include-markdown
+
+# Markdown-Erweiterungen
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.emoji
+  - pymdownx.keys
+  - markdown_include.include:
+      base_path: docs_sample
+
+# Eigene Skripte und Styles
+extra_javascript:
+  - "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"
+  - "assets/js/body-quotient-calculator.js"
+
+extra_css:
+  - "assets/css/custom.css"
+
+# Zusätzliche Informationen
+extra:
+  manifest: "manifest.json"
+  page:
+    icon: true
+  social:
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/peaceiris
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/piris314en
+
+# Navigation
+nav:
+  - 🏠 Startseite: index.md
+
+  - 🧑‍🚀 Charakter & Regeln:
+      - Charaktererstellung: rules/charaktererstellung.md
+      - Regeln: rules/regeln.md
+      - Spielleiterhilfen: rules/spielleiterhilfen.md
+      - Materialsystem: rules/materiallisten.md
+
+  - 🪖 Kadettschaft:
+      - Allgemeine Infos: kadettschaft/allgemein.md
+      - Rangabzeichen: kadettschaft/rangabzeichen.md
+
+  - 🌍 Weltbeschreibung:
+      - Mars: welt/mars.md
+      - Bromsal: welt/bromsal.md
+      - Zeitlinien: welt/timeline.md
+      - Sonnensystem: welt/sonnensystem.md
+      - Quantenraum: welt/quantenraum.md
+      - Karten: welt/karten.md
+
+  - 🎒 Ausrüstung:
+      - Übersicht: ausruestung/index.md
+      - Geraffel: ausruestung/geraffel.md
+      - Anzüge: ausruestung/anzuege.md
+      - Helme: ausruestung/helme.md
+      - Leichtatmer & Handschuhe: ausruestung/leichtatmer-und-handschuhe.md
+
+  - ⚙️ Technik:
+      - Überblick: technik/index.md
+      - Medizin: technik/medizin.md
+      - Kommunikation: technik/kommunikation.md
+      - Vehikel: technik/vehikel.md
+      - Waffen:
+          - Granaten: technik/waffen/granaten.md
+
+  - 🧑‍🌾 Kultur & Alltag:
+      - Marser: kultur/marser.md
+      - Hobbys: kultur/hobbys.md
+      - Kommunikation: kultur/kommunikation.md
+
+  - 👽 Kräfte & Völker:
+      - Völkerübersicht: kraefte/voelker.md
+      - KI: kraefte/ki.md
+      - AKI: kraefte/aki.md
+      - Brom: kraefte/brom.md
+      - Gott: kraefte/gott.md
+      - Raummolche: kraefte/raummolche.md
+
+  - 🎲 Abenteuer:
+      - Wehrerziehungslager: abenteuer/01-wehrerziehungslager.md
+      - Der erste Auftrag: abenteuer/02-erster-auftrag.md
+      - Stimme aus der Stille: abenteuer/03-stimme-aus-der-stille.md
+      - Mini-RPG (solo): abenteuer/99-mini-rpg.md
+      - NPCs:
+          - Wehrerziehungs-Lager: npc/wehrerziehungslager.md
+
+  - ⚖️ Impressum & Datenschutz: impressum.md

@@ -34,6 +34,8 @@ theme:
         name: Wechsel zu dunklem Modus
   features:
     - navigation.tabs
+    - navigation.top
+    - navigation.footer
     - navigation.sections
     - navigation.indexes
     - content.code.copy

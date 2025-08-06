@@ -1,39 +1,106 @@
 /* ==============================
-   Farben: Marsrot & Kometensilber
+   Farben: Terrakotta & Kometensilber
    ============================== */
 
-/* Marsrot für Header (Top-Leiste) */
+/* Terrakotta für Header-Leiste */
 .md-header {
-  background-color: #E04B3D;
+  background-color: #B5532F;
 }
 
-/* Kometensilber für aktives Menü */
+/* Terrakotta für Tabs (Navigation unter Header) */
+.md-tabs {
+  background-color: #B5532F;
+}
+
+/* Schriftfarbe im Header */
+.md-header,
+.md-header a,
+.md-header .md-header__title,
+.md-header .md-header__button {
+  color: #000000 !important;
+}
+
+/* Schriftfarbe in der Tab-Navigation */
+.md-tabs,
+.md-tabs a,
+.md-tabs__link {
+  color: #000000 !important;
+}
+
+/* Aktiver Menüpunkt (alle Bereiche) */
 .md-nav__link--active,
 .md-nav__link--active:hover {
   color: #8F9CA3 !important;
   font-weight: bold;
 }
 
-/* Hovereffekt im Menü */
+/* Hovereffekt für Menülinks */
 .md-nav__link:hover {
-  color: #E04B3D !important;
+  color: #D9693C !important;
 }
 
 /* ==============================
-   Überschriften-Styling
+   Gleichmäßige Tab-Verteilung auf mehrere Zeilen (angepasst für flexible Textlänge)
+   ============================== */
+
+.md-tabs__list {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.4rem !important;
+  padding: 0.5rem 1rem !important;
+  overflow: visible !important;
+}
+
+/* Tab-Größe passt sich automatisch der Textlänge an */
+.md-tabs__item {
+  flex: 0 1 auto !important;       /* Kein Zwang auf fixe Breite */
+  max-width: none !important;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+/* Icon oben, Text unten */
+.md-tabs__link {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+  white-space: nowrap !important;  /* ⛔ Kein Zeilenumbruch */
+  padding: 0.6em 0.8em !important;
+  font-size: 0.75rem !important;
+  line-height: 1.2;
+  gap: 0.2rem !important;
+}
+
+/* Icon-Größe */
+.md-tabs__link .md-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.2em;
+}
+
+/* Responsives Verhalten */
+@media (max-width: 700px) {
+  .md-tabs__link {
+    white-space: normal !important;   /* ✅ Bei kleinen Geräten: doch umbrechen */
+    font-size: 0.7rem !important;
+  }
+}
+
+/* ==============================
+   Inhaltsbereich Überschriften
    ============================== */
 
 h1, h2, h3 {
   clear: both;
 }
 
-/* Marsrot: Linie unter h2 */
 h2 {
   margin: 4rem 0rem 2rem 0rem !important;
   border-bottom: solid 2px #E04B3D;
 }
 
-/* Kometensilber: Balken links bei h3 */
 h3 {
   margin: 3rem 0rem 1rem 0rem !important;
   padding: 0rem 0rem 0.5rem 0.5rem !important;
@@ -41,18 +108,17 @@ h3 {
 }
 
 /* ==============================
-   Medien und responsives Verhalten
+   Medien & Responsive Verhalten
    ============================== */
 
-/* Bilder im Artikel rechtsfloatend */
 article img {
-  width: 33%;
-  float: right;
-  margin: 1rem;
+  display: block;
+  margin: 1rem auto;
+  max-width: 80%;
   border-radius: 0.5rem;
+  float: none !important;
 }
 
-/* Videos und Iframes zentriert */
 video,
 iframe {
   width: 50%;
@@ -60,13 +126,11 @@ iframe {
   margin: 1rem auto;
 }
 
-/* Manuelle Klasse */
 .width50 {
   width: 50%;
 }
 
-/* Mobilanpassung */
-@media(max-width:500px) {
+@media (max-width: 500px) {
   video,
   iframe {
     width: 100%;

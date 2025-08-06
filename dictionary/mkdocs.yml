@@ -51,13 +51,13 @@ plugins:
 
 # Markdown-Erweiterungen
 markdown_extensions:
-  - admonition
-  - pymdownx.details
-  - pymdownx.superfences
-  - pymdownx.tabbed
-  - pymdownx.emoji
-  - pymdownx.keys
-  - markdown_include.include:
+  - admonition                 # HOE: Hinweisboxen
+  - pymdownx.details           # HOE: aufklappbare Abschnitte
+  - pymdownx.superfences       # HOE: verbesserte Codeblöcke
+  - pymdownx.tabbed            # HOE: Reiter/Tabs
+  - pymdownx.emoji             # HOE: Emojis wie :rocket:
+  - pymdownx.keys              # HOE: Tastenkombis wie ⌘+S
+  - markdown_include.include:  # HOE: Markdown-Dateien einfügen
       base_path: docs_sample
 
 # Eigene Skripte und CSS
@@ -81,41 +81,43 @@ extra:
 
 # Navigation
 nav:
-  - 🏠 Startseite: index.md
+  - 🏠 Startseite:
+    - Einleitung: index.md
+    - Nie wieder !: startseite/nie_wieder.md
 
   - 🧑‍🚀 Charakter & Regeln:
-      - Charaktererstellung: rules/charaktererstellung.md
-      - Regeln: rules/regeln.md
-      - Spielleiterhilfen: rules/spielleiterhilfen.md
-      - Materialsystem: rules/materiallisten.md
+    - Charaktererstellung: rules/charaktererstellung.md
+    - Regeln: rules/regeln.md
+    - Spielleiterhilfen: rules/spielleiterhilfen.md
+    - Materialsystem: rules/materiallisten.md
 
   - 🪖 Kadettschaft:
-      - Allgemeine Infos: kadettschaft/allgemein.md
-      - Rangabzeichen: kadettschaft/rangabzeichen.md
+    - Allgemeine Infos: kadettschaft/allgemein.md
+    - Rangabzeichen: kadettschaft/rangabzeichen.md
 
   - 🌍 Weltbeschreibung:
-      - Mars: welt/mars.md
-      - Bromsal: welt/bromsal.md
-      - Zeitlinien: welt/timeline.md
-      - Sonnensystem: welt/sonnensystem.md
-      - Quantenraum: welt/quantenraum.md
-      - Karten: welt/karten.md
+    - Mars: welt/mars.md
+    - Bromsal: welt/bromsal.md
+    - Zeitlinien: welt/timeline.md
+    - Sonnensystem: welt/sonnensystem.md
+    - Quantenraum: welt/quantenraum.md
+    - Karten: welt/karten.md
 
   - 🎒 Ausrüstung:
-      - Übersicht: ausruestung/index.md
-      - Geraffel: ausruestung/geraffel.md
-      - Anzüge: ausruestung/anzuege.md
-      - Helme: ausruestung/helme.md
-      - Leichtatmer & Handschuhe: ausruestung/leichtatmer-und-handschuhe.md
+    - Übersicht: ausruestung/index.md
+    - Geraffel: ausruestung/geraffel.md
+    - Anzüge: ausruestung/anzuege.md
+    - Helme: ausruestung/helme.md
+    - Leichtatmer & Handschuhe: ausruestung/leichtatmer-und-handschuhe.md
 
   - ⚙️ Technik:
-      - Kommunikation & Medizin:
-          - Kommunikation: technik/kommunikation.md
-          - Medizin: technik/medizin.md
-      - Fahrzeuge & Waffen:
-          - Vehikel: technik/vehikel.md
-          - Waffen:
-              - Granaten: technik/waffen/granaten.md
+    - Kommunikation & Medizin:
+        - Kommunikation: technik/kommunikation.md
+        - Medizin: technik/medizin.md
+    - Fahrzeuge & Waffen:
+        - Vehikel: technik/vehikel.md
+        - Waffen:
+          - Granaten: technik/waffen/granaten.md
 
   - 🧑‍🌾 Kultur & Alltag:
       - Marser: kultur/marser.md

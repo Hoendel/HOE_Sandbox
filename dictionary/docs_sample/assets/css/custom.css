@@ -40,7 +40,7 @@
 }
 
 /* ==============================
-   Gleichmäßige Tab-Verteilung auf mehrere Zeilen (angepasst für flexible Textlänge)
+   Gleichmäßige Tab-Verteilung auf mehrere Zeilen
    ============================== */
 
 .md-tabs__list {
@@ -52,38 +52,34 @@
   overflow: visible !important;
 }
 
-/* Tab-Größe passt sich automatisch der Textlänge an */
 .md-tabs__item {
-  flex: 0 1 auto !important;       /* Kein Zwang auf fixe Breite */
+  flex: 0 1 auto !important;
   max-width: none !important;
   text-align: center;
   box-sizing: border-box;
 }
 
-/* Icon oben, Text unten */
 .md-tabs__link {
   display: flex !important;
   flex-direction: column !important;
   align-items: center !important;
   justify-content: center !important;
   text-align: center !important;
-  white-space: nowrap !important;  /* ⛔ Kein Zeilenumbruch */
+  white-space: nowrap !important;
   padding: 0.6em 0.8em !important;
   font-size: 0.75rem !important;
   line-height: 1.2;
   gap: 0.2rem !important;
 }
 
-/* Icon-Größe */
 .md-tabs__link .md-icon {
   font-size: 1.4rem;
   margin-bottom: 0.2em;
 }
 
-/* Responsives Verhalten */
 @media (max-width: 700px) {
   .md-tabs__link {
-    white-space: normal !important;   /* ✅ Bei kleinen Geräten: doch umbrechen */
+    white-space: normal !important;
     font-size: 0.7rem !important;
   }
 }
@@ -136,3 +132,29 @@ iframe {
     width: 100%;
   }
 }
+
+/* ==============================
+   Eigene Textbox (.textbox) – responsive & darkmode-freundlich
+   ============================== */
+
+.textbox {
+  border: 3px solid #E04B3D;                   /* Marsrot, etwas dicker */
+  background-color: var(--md-default-bg-color); /* passt sich Theme an */
+  color: var(--md-default-fg-color);           /* Textfarbe je nach Modus */
+  padding: 1rem 1.5rem;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-sizing: border-box;
+  line-height: 1.6;
+  font-size: 1rem;
+  max-width: 100%;
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+@media (min-width: 768px) {
+  .textbox {
+    max-width: 800px;
+  }
+}
+

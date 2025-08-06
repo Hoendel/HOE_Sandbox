@@ -124,6 +124,7 @@ extra:
 nav:
   - 🏠 Startseite: index.md
 
+
   - 🧑‍🚀 Charakter & Regeln:
       - Charaktererstellung: rules/charaktererstellung.md
       - Regeln: rules/regeln.md

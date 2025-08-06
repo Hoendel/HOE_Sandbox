@@ -88,12 +88,13 @@ nav:
 
   - 🧑‍🚀 Charakter & Regeln:
     - Charaktererstellung: rules/charaktererstellung.md
+    - Characterbögen: rules/characterboegen.md
     - Regeln: rules/regeln.md
-    - Spielleiterhilfen: rules/spielleiterhilfen.md
-    - Materialsystem: rules/materiallisten.md
+
 
   - 📋 Spielleiterhilfen:
-      - Vorbereitung: rules/spielleiterhilfen.md
+      - Vorbereitung: spielleiterhilfen/spielleiterhilfen.md
+      - Materialsystem: spielleiterhilfen/materiallisten.md
 
   - 🪖 Kadettschaft:
     - Allgemeine Infos: kadettschaft/allgemein.md

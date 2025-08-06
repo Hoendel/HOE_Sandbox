@@ -25,17 +25,27 @@ Divers, barrierefrei gedacht, voller Geheimnisse, Herz und Kampfgeist.
 
 ## Mars, 2045. 2. Interplanetarischer Krieg.
 
-Ja, Kacke … Krieg und Kindsein …
+>Ihr schlüpft in die Rollen **Marser Kinder**.
+>Marser sind Feline mit Fell, Schwarz und Schnurrhaaren.
+>Erlebt ein wundervolles Abenteuer – und macht die Welt ein bisschen besser!
 
-Ihr seid mittendrin. Mitglieder der MZ-Kadettschaft und zukünftige Soldaten! Okay, ihr seid erst 8 Winter alt, manche sogar 16. Aber man muss früh anfangen. Schliesslich wollen wir den Krieg gewinnen.
-Daher viel Spass im Wehrerziehungslager und danach bei Eurem ersten richtigen Auftrag: der Observation der Mars-Kristallnacht. Ihr werdet den Marsianischen Zephir stolz machen!
+!!! quote "Ja, Kacke … Krieg und Kindsein …"
 
-===
+    Ihr seid mittendrin. Mitglieder der **MZ-Kadettschaft** und zukünftige Soldaten!
+    Okay, ihr seid erst 8 Winter alt, manche sogar 16.
+    Aber man muss früh anfangen – schließlich wollen wir den Krieg gewinnen.
 
-Kleiner Tipp: Und schau zu, dass niemand mitbekommt, dass deine Schwester behindert ist. Sonst kommen sie sie holen … also verrate keinem dein Geheimnis.
+    Daher: **Viel Spaß im Wehrerziehungslager**
+    und danach bei eurem ersten richtigen Auftrag:
+    der **Observation der Mars-Kristallnacht**.
+    Ihr werdet den Marsianischen Zephir stolz machen!
 
-===
 
-Ihr schlüpft in die Rollen Marser Kinder. Marser sind Feline mit Fell, Schwarz und Schnurrhaaren. Erlebt ein wundervolles Abenteuer und macht die Welt es bisschen besser!
+!!! tip "Kleiner Tipp:"
+
+    Und schau zu, dass niemand mitbekommt,
+    dass deine Schwester behindert ist.
+    Sonst kommen sie sie holen …
+    also verrate keinem dein Geheimnis.
 
 

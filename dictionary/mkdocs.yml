@@ -84,6 +84,7 @@ nav:
   - 🏠 Startseite:
     - Einleitung: index.md
     - Nie wieder !: startseite/nie_wieder.md
+    - Sound: startseite/sound.md
 
   - 🧑‍🚀 Charakter & Regeln:
     - Charaktererstellung: rules/charaktererstellung.md

@@ -81,88 +81,6 @@
 .md-nav__title { color: var(--md-default-fg-color) !important; }
 
 /* ==============================
-   Farbvariablen – Light Mode
-   ============================== */
-:root {
-  --farbe-marsrot:       #E04B3D;   /* Header, .textbox, Balken */
-  --farbe-kometensilber: #8F9CA3;   /* Info, aktive Links, h3, !!! info */
-  --farbe-warning:       #FFA000;   /* !!! warning */
-  --farbe-danger:        #C62828;   /* !!! danger */
-  --farbe-hover:         #D9693C;   /* Hover-Effekt */
-  --farbe-link:          #0645AD;   /* Linkfarbe */
-}
-
-/* ==============================
-   Dark Mode Anpassung
-   ============================== */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --farbe-kometensilber: #B0BEC5;  /* helleres Silber */
-    --farbe-warning:       #FFB300;
-    --farbe-danger:        #EF5350;
-    --farbe-hover:         #FF8A65;
-    --farbe-link:          #90CAF9;
-  }
-
-  /* Lesbarkeit in Textboxen erhöhen */
-  .textbox { color: #CFD8DC; }
-}
-
-/* ==============================
-   Header & Tabs
-   ============================== */
-.md-header { background-color: var(--farbe-marsrot); }
-.md-tabs   { background-color: var(--farbe-marsrot); }
-
-.md-header,
-.md-header a,
-.md-header .md-header__title,
-.md-header .md-header__button { color: #000000 !important; }
-
-.md-tabs,
-.md-tabs a,
-.md-tabs__link { color: #000000 !important; }
-
-.md-nav__link--active,
-.md-nav__link--active:hover {
-  color: var(--farbe-kometensilber) !important;
-  font-weight: bold;
-}
-
-.md-nav__link:hover { color: var(--farbe-hover) !important; }
-
-/* ==============================
-   Navigationstitel: einheitlicher Marsrot-Balken
-   (linkes Hauptmenü + rechtes Inhaltsverzeichnis)
-   ============================== */
-.md-nav__title,
-.md-nav--secondary .md-nav__title {
-  background-color: var(--farbe-marsrot) !important;
-  color: var(--md-default-fg-color) !important;
-  font-weight: bold;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
-/* ==============================
-   Linkes Menü – Hintergrund
-   ============================== */
-/* Standard (mobil & kleine Screens): Drawer in Marsrot */
-.md-sidebar--primary,
-.md-nav__source { background-color: var(--farbe-marsrot) !important; }
-
-/* Desktop: Hintergrund entfernen, nur Text und Balken bleiben */
-@media (min-width: 60em) {  /* ~960px */
-  .md-sidebar--primary { background-color: transparent !important; }
-}
-
-/* Menüttexte immer theme-gerecht (Hell/Dunkel) */
-.md-nav,
-.md-nav a,
-.md-nav__link,
-.md-nav__title { color: var(--md-default-fg-color) !important; }
-
-/* ==============================
    Footer – identisch zum Top-Menü
    ============================== */
 .md-footer,
@@ -170,7 +88,7 @@
 .md-footer-nav,
 .md-footer-social {
   background-color: var(--farbe-marsrot) !important;
-  color: var(--md-default-fg-color) !important; /* gleiche Standardfarbe wie Menü */
+  color: #000000 !important; /* gleiche Standardfarbe wie Top-Menü */
   box-shadow: none !important;
   border-top: none !important;
 }
@@ -178,14 +96,14 @@
 .md-footer a,
 .md-footer .md-social__link,
 .md-footer-nav__link {
-  color: var(--md-default-fg-color) !important; /* gleiche Textfarbe wie Menü */
+  color: #000000 !important;            /* wie Top-Menü */
   transition: color 0.2s ease-in-out;
 }
 
 .md-footer a:hover,
 .md-footer .md-social__link:hover,
 .md-footer-nav__link:hover {
-  color: var(--farbe-hover) !important; /* gleiche Hoverfarbe wie Menü */
+  color: var(--farbe-hover) !important; /* gleicher Hover wie oben */
 }
 
 /* ==============================
@@ -277,8 +195,5 @@ details.textbox[open] { animation: fadein 0.3s ease-in-out; }
 
 /* ==============================
    (Optional) Social-Icons im Footer komplett ausblenden
-   → auskommentieren, falls nicht gewünscht
    ============================== */
-/*
-.md-footer .md-social { display: none !important; }
-*/
+/* .md-footer .md-social { display: none !important; } */

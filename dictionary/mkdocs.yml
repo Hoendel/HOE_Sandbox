@@ -73,11 +73,11 @@ extra:
   manifest: "manifest.json"
   page:
     icon: true
-  social:
-    - icon: fontawesome/brands/github-alt
-      link: https://github.com/peaceiris
-    - icon: fontawesome/brands/twitter
-      link: https://twitter.com/piris314en
+# social:
+#   - icon: fontawesome/brands/github-alt
+#     link: https://github.com/peaceiris
+#   - icon: fontawesome/brands/twitter
+#     link: https://twitter.com/piris314en
 
 # Navigation
 nav:

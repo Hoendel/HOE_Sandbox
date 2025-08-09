@@ -1,48 +1,111 @@
 /* ==============================
-   Farben: Terrakotta & Kometensilber
+   Farbvariablen – Light Mode
    ============================== */
-
-/* Terrakotta für Header-Leiste */
-.md-header {
-  background-color: #B5532F;
-}
-
-/* Terrakotta für Tabs (Navigation unter Header) */
-.md-tabs {
-  background-color: #B5532F;
-}
-
-/* Schriftfarbe im Header */
-.md-header,
-.md-header a,
-.md-header .md-header__title,
-.md-header .md-header__button {
-  color: #000000 !important;
-}
-
-/* Schriftfarbe in der Tab-Navigation */
-.md-tabs,
-.md-tabs a,
-.md-tabs__link {
-  color: #000000 !important;
-}
-
-/* Aktiver Menüpunkt (alle Bereiche) */
-.md-nav__link--active,
-.md-nav__link--active:hover {
-  color: #8F9CA3 !important;
-  font-weight: bold;
-}
-
-/* Hovereffekt für Menülinks */
-.md-nav__link:hover {
-  color: #D9693C !important;
+:root {
+  --farbe-marsrot:       #E04B3D;   /* Header, .textbox, Balken */
+  --farbe-kometensilber: #8F9CA3;   /* Info, aktive Links, h3, !!! info */
+  --farbe-warning:       #FFA000;   /* !!! warning */
+  --farbe-danger:        #C62828;   /* !!! danger */
+  --farbe-hover:         #D9693C;   /* Hover-Effekt */
+  --farbe-link:          #0645AD;   /* Linkfarbe */
 }
 
 /* ==============================
-   Gleichmäßige Tab-Verteilung auf mehrere Zeilen
+   Dark Mode Anpassung
    ============================== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --farbe-kometensilber: #B0BEC5;  /* helleres Silber */
+    --farbe-warning:       #FFB300;
+    --farbe-danger:        #EF5350;
+    --farbe-hover:         #FF8A65;
+    --farbe-link:          #90CAF9;
+  }
 
+  /* Lesbarkeit in Textboxen erhöhen */
+  .textbox { color: #CFD8DC; }
+}
+
+/* ==============================
+   Header & Tabs
+   ============================== */
+.md-header { background-color: var(--farbe-marsrot); }
+.md-tabs   { background-color: var(--farbe-marsrot); }
+
+.md-header,
+.md-header a,
+.md-header .md-header__title,
+.md-header .md-header__button { color: #000000 !important; }
+
+.md-tabs,
+.md-tabs a,
+.md-tabs__link { color: #000000 !important; }
+
+.md-nav__link--active,
+.md-nav__link--active:hover {
+  color: var(--farbe-kometensilber) !important;
+  font-weight: bold;
+}
+
+.md-nav__link:hover { color: var(--farbe-hover) !important; }
+
+/* ==============================
+   Navigationstitel: einheitlicher Marsrot-Balken
+   (linkes Hauptmenü + rechtes Inhaltsverzeichnis)
+   ============================== */
+.md-nav__title,
+.md-nav--secondary .md-nav__title {
+  background-color: var(--farbe-marsrot) !important;
+  color: var(--md-default-fg-color) !important;
+  font-weight: bold;
+  box-shadow: none !important;   /* Glanz/Schatten entfernen */
+  border-radius: 0 !important;
+}
+
+/* ==============================
+   Linkes Menü – Hintergrund
+   - Mobil: Marsrot (Drawer)
+   - Desktop: transparent
+   ============================== */
+/* Standard (mobil & kleine Screens): Drawer in Marsrot */
+.md-sidebar--primary,
+.md-nav__source { background-color: var(--farbe-marsrot) !important; }
+
+/* Desktop: Hintergrund entfernen, nur Text und Balken bleiben */
+@media (min-width: 60em) {  /* ~960px, Material-Breakpoint */
+  .md-sidebar--primary { background-color: transparent !important; }
+}
+
+/* Menüttexte immer theme-gerecht (Hell/Dunkel) */
+.md-nav,
+.md-nav a,
+.md-nav__link,
+.md-nav__title { color: var(--md-default-fg-color) !important; }
+
+/* ==============================
+   Footer
+   ============================== */
+.md-footer,
+.md-footer-meta,
+.md-footer-nav,
+.md-footer-social {
+  background-color: var(--farbe-marsrot) !important;
+  color: var(--farbe-kometensilber) !important; /* Text in Silber */
+}
+
+/* Links & Icons im Footer: Silber, Hover gut sichtbar */
+.md-footer a,
+.md-footer .md-social__link {
+  color: var(--farbe-kometensilber) !important;
+}
+.md-footer a:hover,
+.md-footer .md-social__link:hover {
+  color: #FFFFFF !important; /* klarer Kontrast auf Marsrot */
+}
+
+/* ==============================
+   Tabs auf mehrere Zeilen verteilen
+   ============================== */
 .md-tabs__list {
   display: flex !important;
   flex-wrap: wrap !important;
@@ -51,110 +114,79 @@
   padding: 0.5rem 1rem !important;
   overflow: visible !important;
 }
-
-.md-tabs__item {
-  flex: 0 1 auto !important;
-  max-width: none !important;
-  text-align: center;
-  box-sizing: border-box;
-}
-
+.md-tabs__item { flex: 0 1 auto !important; max-width: none !important; text-align: center; box-sizing: border-box; }
 .md-tabs__link {
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: center !important;
-  text-align: center !important;
-  white-space: nowrap !important;
-  padding: 0.6em 0.8em !important;
-  font-size: 0.75rem !important;
-  line-height: 1.2;
-  gap: 0.2rem !important;
+  display: flex !important; flex-direction: column !important;
+  align-items: center !important; justify-content: center !important;
+  text-align: center !important; white-space: nowrap !important;
+  padding: 0.6em 0.8em !important; font-size: 0.75rem !important;
+  line-height: 1.2; gap: 0.2rem !important;
 }
-
-.md-tabs__link .md-icon {
-  font-size: 1.4rem;
-  margin-bottom: 0.2em;
-}
-
+.md-tabs__link .md-icon { font-size: 1.4rem; margin-bottom: 0.2em; }
 @media (max-width: 700px) {
-  .md-tabs__link {
-    white-space: normal !important;
-    font-size: 0.7rem !important;
-  }
+  .md-tabs__link { white-space: normal !important; font-size: 0.7rem !important; }
 }
 
 /* ==============================
-   Inhaltsbereich Überschriften
+   Überschriften
    ============================== */
-
-h1, h2, h3 {
-  clear: both;
-}
-
-h2 {
-  margin: 4rem 0rem 2rem 0rem !important;
-  border-bottom: solid 2px #E04B3D;
-}
-
+h1, h2, h3 { clear: both; }
+h2 { margin: 4rem 0 2rem !important; border-bottom: 2px solid var(--farbe-marsrot); }
 h3 {
-  margin: 3rem 0rem 1rem 0rem !important;
-  padding: 0rem 0rem 0.5rem 0.5rem !important;
-  border-left: solid 3px #8F9CA3;
+  margin: 3rem 0 1rem !important;
+  padding: 0 0 0.5rem 0.5rem !important;
+  border-left: 3px solid var(--farbe-kometensilber);
 }
 
 /* ==============================
-   Medien & Responsive Verhalten
+   Medien & Responsive
    ============================== */
-
 article img {
-  display: block;
-  margin: 1rem auto;
-  max-width: 80%;
-  border-radius: 0.5rem;
-  float: none !important;
+  display: block; margin: 1rem auto; max-width: 80%;
+  border-radius: 0.5rem; float: none !important;
 }
-
-video,
-iframe {
-  width: 50%;
-  display: block;
-  margin: 1rem auto;
-}
-
-.width50 {
-  width: 50%;
-}
-
-@media (max-width: 500px) {
-  video,
-  iframe {
-    width: 100%;
-  }
-}
+video, iframe { width: 50%; display: block; margin: 1rem auto; }
+.width50 { width: 50%; }
+@media (max-width: 500px) { video, iframe { width: 100%; } }
 
 /* ==============================
-   Eigene Textbox (.textbox) – responsive & darkmode-freundlich
+   .textbox + einklappbar
    ============================== */
-
 .textbox {
-  border: 3px solid #E04B3D;                   /* Marsrot, etwas dicker */
-  background-color: var(--md-default-bg-color); /* passt sich Theme an */
-  color: var(--md-default-fg-color);           /* Textfarbe je nach Modus */
-  padding: 1rem 1.5rem;
-  margin: 2rem auto;
-  border-radius: 8px;
-  box-sizing: border-box;
-  line-height: 1.6;
-  font-size: 1rem;
-  max-width: 100%;
-  word-wrap: break-word;
-  white-space: normal;
+  border: 3px solid var(--farbe-marsrot);
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  padding: 1rem 1.5rem; margin: 2rem auto;
+  border-radius: 8px; box-sizing: border-box;
+  line-height: 1.6; font-size: 1rem; max-width: 100%;
+  word-wrap: break-word; white-space: normal;
 }
+@media (min-width: 768px) { .textbox { max-width: 800px; } }
+details.textbox summary { cursor: pointer; font-weight: bold; padding-bottom: 0.5rem; }
+details.textbox[open] { animation: fadein 0.3s ease-in-out; }
+@keyframes fadein { from { opacity: 0; } to { opacity: 1; } }
 
-@media (min-width: 768px) {
-  .textbox {
-    max-width: 800px;
-  }
+/* ==============================
+   Admonitions (!!! info, warning, danger, ...)
+   ============================== */
+.md-typeset .admonition,
+.md-typeset details.admonition {
+  border: 3px solid transparent; border-radius: 8px;
+  padding: 1rem 1.5rem; font-size: 1rem; line-height: 1.6;
+  margin: 2rem 0; box-sizing: border-box;
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
 }
+.md-typeset .admonition-title { font-weight: bold; font-size: 1rem; margin-bottom: 0.5rem; }
+
+.md-typeset .admonition.info,
+.md-typeset details.admonition.info       { border-color: var(--farbe-kometensilber); }
+.md-typeset .admonition.tip,
+.md-typeset details.admonition.tip        { border-color: var(--md-accent-fg-color); }
+.md-typeset .admonition.warning,
+.md-typeset details.admonition.warning    { border-color: var(--farbe-warning); }
+.md-typeset .admonition.danger,
+.md-typeset details.admonition.danger     { border-color: var(--farbe-danger); }
+.md-typeset .admonition.note,
+.md-typeset details.admonition.note       { border-color: var(--md-default-fg-color); }
 

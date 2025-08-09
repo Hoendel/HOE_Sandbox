@@ -58,21 +58,19 @@
   background-color: var(--farbe-marsrot) !important;
   color: var(--md-default-fg-color) !important;
   font-weight: bold;
-  box-shadow: none !important;   /* Glanz/Schatten entfernen */
+  box-shadow: none !important;
   border-radius: 0 !important;
 }
 
 /* ==============================
    Linkes Menü – Hintergrund
-   - Mobil: Marsrot (Drawer)
-   - Desktop: transparent
    ============================== */
 /* Standard (mobil & kleine Screens): Drawer in Marsrot */
 .md-sidebar--primary,
 .md-nav__source { background-color: var(--farbe-marsrot) !important; }
 
 /* Desktop: Hintergrund entfernen, nur Text und Balken bleiben */
-@media (min-width: 60em) {  /* ~960px, Material-Breakpoint */
+@media (min-width: 60em) {  /* ~960px */
   .md-sidebar--primary { background-color: transparent !important; }
 }
 
@@ -83,24 +81,25 @@
 .md-nav__title { color: var(--md-default-fg-color) !important; }
 
 /* ==============================
-   Footer
+   Footer – gleiche Textfarbe & Hover wie Menü
    ============================== */
 .md-footer,
 .md-footer-meta,
 .md-footer-nav,
 .md-footer-social {
   background-color: var(--farbe-marsrot) !important;
-  color: var(--farbe-kometensilber) !important; /* Text in Silber */
+  color: var(--md-default-fg-color) !important;
 }
 
-/* Links & Icons im Footer: Silber, Hover gut sichtbar */
 .md-footer a,
 .md-footer .md-social__link {
-  color: var(--farbe-kometensilber) !important;
+  color: var(--md-default-fg-color) !important;
+  transition: color 0.2s ease-in-out;
 }
+
 .md-footer a:hover,
 .md-footer .md-social__link:hover {
-  color: #FFFFFF !important; /* klarer Kontrast auf Marsrot */
+  color: var(--farbe-hover) !important;
 }
 
 /* ==============================
@@ -189,4 +188,3 @@ details.textbox[open] { animation: fadein 0.3s ease-in-out; }
 .md-typeset details.admonition.danger     { border-color: var(--farbe-danger); }
 .md-typeset .admonition.note,
 .md-typeset details.admonition.note       { border-color: var(--md-default-fg-color); }
-

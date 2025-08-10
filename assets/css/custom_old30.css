@@ -1,0 +1,322 @@
+/* ===========================================================
+   0) Schriftgröße & User-Scale (nur Text, nicht Layout)
+   =========================================================== */
+
+/* Standard (=1). Wird von scale.js verändert, Layoutbreiten bleiben unberührt */
+:root{
+  --user-font-scale: 1;
+  --user-lineheight-scale: 1; /* optional 1–1.2 für mehr Zeilenluft */
+}
+
+/* Fließtext & allgemeine Typo skalieren */
+body, .md-typeset{
+  font-size: calc(1rem * var(--user-font-scale));
+  line-height: calc(1.6 * var(--user-lineheight-scale));
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* Navigation/TOC auch skalieren */
+.md-header,
+.md-tabs,
+.md-footer,
+.md-nav--primary,
+.md-nav--secondary{
+  font-size: calc(1em * var(--user-font-scale));
+  line-height: calc(1.3 * var(--user-lineheight-scale));
+}
+
+/* Überschriften im Content proportional mitziehen */
+.md-typeset h1{ font-size: calc(2rem * var(--user-font-scale)); }
+.md-typeset h2{ font-size: calc(1.3rem * var(--user-font-scale)); }
+.md-typeset h3{ font-size: calc(1.1rem * var(--user-font-scale)); }
+
+/* Sidebar-/TOC-Links: Umbruch sicherstellen */
+.md-nav__link{
+  white-space: normal;
+  overflow-wrap: anywhere;
+  max-width: 100%;
+}
+
+/* ===========================================================
+   0) Farb-Tokens + Aliasse
+   =========================================================== */
+
+/* Helles Schema */
+[data-md-color-scheme="default"]{
+  --md-primary-fg-color:           #B04F34;
+  --md-primary-fg-color--light:    #C65B3C;
+  --md-primary-fg-color--dark:     #8E3F2A;
+  --md-accent-fg-color:            #8F9CA3;
+
+  --color-main:    var(--md-primary-fg-color);
+  --color-accent:  var(--md-accent-fg-color);
+
+  --on-main-dim:    rgba(0,0,0,.85);
+  --on-main-strong: #000;
+  --nav-text:       var(--md-default-fg-color);
+  --link-color:     #0645AD;
+}
+
+/* Dunkles Schema */
+[data-md-color-scheme="slate"]{
+  --md-primary-fg-color:           #B04F34;
+  --md-primary-fg-color--light:    #D16651;
+  --md-primary-fg-color--dark:     #8E3F2A;
+  --md-accent-fg-color:            #B0BEC5;
+
+  --color-main:    var(--md-primary-fg-color);
+  --color-accent:  var(--md-accent-fg-color);
+
+  --on-main-dim:    rgba(255,255,255,.90);
+  --on-main-strong: #fff;
+  --nav-text:       var(--md-default-fg-color);
+  --link-color:     #90CAF9;
+}
+
+/* ===========================================================
+   1) Header, Tabs, Footer
+   =========================================================== */
+.md-header,
+.md-tabs,
+.md-footer{ background-color: var(--color-main) !important; }
+
+.md-header .md-header__title,
+.md-header .md-header__title .md-ellipsis,
+.md-header a,
+.md-header .md-header__button,
+.md-header .md-header__button .md-icon,
+.md-tabs__link,
+.md-tabs__link .md-ellipsis,
+.md-tabs__link .md-icon{
+  color: var(--on-main-strong) !important;
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+/* Keine Farbänderung im Header-Menü */
+:where(.md-header a, .md-header__button, .md-tabs__link):hover,
+:where(.md-header a, .md-header__button, .md-tabs__link):active{
+  color: var(--on-main-strong) !important;
+}
+
+/* Tabs zweizeilig */
+.md-tabs{ overflow: visible !important; }
+.md-tabs__list{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  gap:.4rem .8rem !important;
+  padding:.5rem 1rem !important;
+}
+.md-tabs__item{ flex:0 1 auto !important; max-width:none !important; }
+
+/* Tabs: Standardgröße */
+.md-tabs__link{
+  display:flex !important;
+  flex-direction:column !important;
+  align-items:center !important;
+  gap:.25rem !important;
+  padding:.7em .9em !important;
+  font-size:1rem !important;       /* Standardgröße */
+  line-height:1.25;
+  transition: font-size .18s ease, font-weight .18s ease;
+}
+
+/* Tabs: Hover größer */
+.md-tabs__link:hover{
+  font-size:1.12rem !important;
+  font-weight:700 !important;
+}
+
+/* Tabs: aktiv noch größer */
+.md-tabs__link--active{
+  font-size:1.15rem !important;
+  font-weight:700 !important;
+}
+
+.md-tabs__link .md-icon{
+  font-size:1.5rem;
+  margin-bottom:.25em;
+}
+
+/* Footer */
+.md-footer,
+.md-footer__inner,
+.md-footer-nav,
+.md-footer-meta{
+  background-color: var(--color-main) !important; border-top:none !important;
+}
+.md-footer-nav{ display:flex !important; visibility:visible !important; opacity:1 !important; }
+.md-footer-nav__link, .md-footer-nav__button, .md-footer__link,
+.md-footer-nav__link *, .md-footer-nav__button *{
+  color: inherit !important; fill: currentColor !important; stroke: currentColor !important;
+}
+
+/* ===========================================================
+   2) Suche im Header
+   =========================================================== */
+.md-header .md-search__form{
+  background-color: var(--md-primary-fg-color--dark) !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15) !important;
+}
+.md-header .md-search__input{ color: var(--on-main-dim) !important; }
+.md-header .md-search__icon { color: var(--on-main-dim) !important; }
+.md-header .md-search__input::placeholder{
+  color: color-mix(in srgb, var(--on-main-dim) 70%, transparent) !important;
+}
+.md-header .md-search__form:focus-within{
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--on-main-strong) 35%, transparent) !important;
+}
+
+/* ===========================================================
+   3) Sidebars & TOC
+   =========================================================== */
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: var(--color-main) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link:hover,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: var(--md-primary-fg-color--dark) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link:hover,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: color-mix(in srgb, var(--md-primary-fg-color--dark) 88%, #fff 12%) !important;
+}
+.md-sidebar--secondary, .md-nav--secondary{ overflow: visible; }
+.md-nav--secondary .md-nav__title{
+  background: var(--color-main) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  margin: 0 .5rem 0 .25rem !important;
+  width: calc(100% - .75rem) !important;
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-nav--secondary .md-nav__title:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+.md-nav--primary .md-nav__link,
+.md-nav--secondary .md-nav__link{
+  color: var(--nav-text) !important; background: transparent !important;
+  white-space: normal; overflow-wrap: anywhere; max-width: 100%;
+}
+.md-nav__link::before{ content:none !important; }
+
+/* ===========================================================
+   4) Lupen-Effekte & Aktiv-Zustände
+   =========================================================== */
+/* (Tabs werden jetzt direkt über Hover/Aktiv gesteuert, daher keine Änderung nötig) */
+
+/* ===========================================================
+   5) Überschriften
+   =========================================================== */
+h1, h2, h3{ clear:both; font-weight:700; }
+h1{ margin:2.5rem 0 1.5rem; font-size:2rem; line-height:1.3; }
+h2{ margin:2rem 0 1.2rem !important; border-bottom:2px solid var(--color-main); padding-bottom:.3rem; }
+h3{ margin:1.5rem 0 1rem !important; padding:0 0 .4rem .6rem !important; border-left:3px solid var(--color-accent); }
+@media (max-width:768px){
+  h1{ font-size:1.7rem; } h2{ font-size:1.3rem; } h3{ font-size:1.1rem; }
+}
+
+/* ===========================================================
+   6) Textblöcke + Admonitions
+   =========================================================== */
+.textbox, .textblock{
+  border:3px solid var(--color-main);
+  background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  padding:1rem 1.5rem; margin:2rem auto; border-radius:8px;
+  line-height:1.6; max-width:100%; box-sizing:border-box;
+}
+@media (min-width:768px){ .textbox, .textblock{ max-width:800px; } }
+details.textbox, details.textblock{
+  margin: 1.5rem auto; border:2px solid var(--color-accent); border-radius:8px; overflow:hidden; max-width:100%;
+}
+@media (min-width:768px){ details.textbox, details.textblock{ max-width:800px; } }
+details.textbox summary, details.textblock summary{
+  background-color: var(--color-main); color: var(--on-main-strong); font-weight:700;
+  padding:.75rem 1rem; cursor:pointer; list-style:none; position:relative;
+}
+details.textbox summary::after, details.textblock summary::after{
+  content:"▶"; position:absolute; right:1rem; transition: transform .3s ease;
+}
+details.textbox[open] summary::after, details.textblock[open] summary::after{ transform:rotate(90deg); }
+details.textbox > *:not(summary), details.textblock > *:not(summary){
+  padding:1rem; background-color:var(--md-default-bg-color); color:var(--md-default-fg-color);
+}
+details.textbox[open], details.textblock[open]{ animation: tb-fadein .25s ease-in-out; }
+@keyframes tb-fadein{ from{opacity:0} to{opacity:1} }
+.md-typeset .admonition,
+.md-typeset details.admonition{
+  border:3px solid transparent; border-radius:8px; padding:1rem 1.5rem; margin:2rem 0;
+  background-color:var(--md-default-bg-color); color:var(--md-default-fg-color);
+}
+.md-typeset .admonition-title{ font-weight:700; font-size:1rem; margin-bottom:.5rem; }
+.md-typeset .admonition.info{    border-color:var(--color-accent); }
+.md-typeset .admonition.tip{     border-color:#4CAF50; }
+.md-typeset .admonition.warning{ border-color:#FFA000; }
+.md-typeset .admonition.danger{  border-color:#C62828; }
+.md-typeset .admonition.note{    border-color:var(--md-default-fg-color); }
+
+/* ===========================================================
+   7) Medien & Content-Links
+   =========================================================== */
+article img{ display:block; margin:1rem auto; max-width:80%; border-radius:.5rem; }
+video, iframe{ max-width:100%; width:100%; height:auto; display:block; margin:1rem auto; }
+.width25{ width:25% !important; margin-inline:auto; display:block; }
+.width33{ width:33% !important; margin-inline:auto; display:block; }
+.width50{ width:50% !important; margin-inline:auto; display:block; }
+.width66{ width:66% !important; margin-inline:auto; display:block; }
+.width75{ width:75% !important; margin-inline:auto; display:block; }
+.width90{ width:90% !important; margin-inline:auto; display:block; }
+@media (max-width:500px){
+  .width25, .width33, .width50, .width66, .width75, .width90{ width:100% !important; }
+}
+.md-typeset a{ color: var(--link-color); }
+
+/* ===========================================================
+   8) Mobile-Optimierung
+   =========================================================== */
+@media (hover:none) and (pointer:coarse){
+  a, button { -webkit-tap-highlight-color: rgba(0,0,0,0.08); }
+  .md-tabs__link:hover{ font-size:1.12rem !important; }
+  .md-tabs__link--active{ font-size:1.15rem !important; }
+}
+@media (prefers-reduced-motion: reduce){
+  .md-header a .md-ellipsis,
+  .md-header__button .md-ellipsis,
+  .md-tabs__link,
+  .md-nav__link,
+  .md-footer-nav__link,
+  .md-footer__link,
+  .md-footer-meta a{ transition:none; }
+}

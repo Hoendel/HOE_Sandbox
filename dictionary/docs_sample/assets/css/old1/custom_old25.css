@@ -1,21 +1,21 @@
 /* ===========================================================
-   0) Schriftgröße & User-Scale (nur Text, nicht Layout)
+   0) Baseline: Tokens, Defaults, Typo-Scale (nur Text)
    =========================================================== */
 
-/* Standard (=1). Wird von scale.js verändert, Layoutbreiten bleiben unberührt */
+/* Basisgröße unverändert wie früher: 16px */
+html { font-size: 16px; }
+
+/* User-Scale: nur Text (Layoutbreiten bleiben unberührt) */
 :root{
-  --user-font-scale: 1;
-  --user-lineheight-scale: 1; /* optional 1–1.2 für mehr Zeilenluft */
+  --user-font-scale: 1;         /* wird von scale.js gesetzt */
+  --user-lineheight-scale: 1;   /* 1 … 1.2 möglich */
 
-  /* Linke Sidebar-Breite (rechte bleibt unverändert) */
-  --md-sidebar-width: 260px;
-
-  /* Einheitliche Typo zwischen linker Sidebar (Primary) und rechter TOC (Secondary) */
-  --primary-nav-title-size: 1rem;  /* Abschnittstitel-Pill links  ≈ TOC-Titel rechts */
-  --primary-nav-link-size:  1rem;  /* Links darunter links        ≈ TOC-Links rechts */
+  /* Zoomfaktoren für leichte Typo-Hervorhebung (nur Text) */
+  --zoom-font: 1.08;
+  --zoom-font-active: 1.08;
 }
 
-/* Fließtext & allgemeine Typo skalieren */
+/* Fließtext */
 body, .md-typeset{
   font-size: calc(1rem * var(--user-font-scale));
   line-height: calc(1.6 * var(--user-lineheight-scale));
@@ -23,22 +23,24 @@ body, .md-typeset{
   word-break: normal;
 }
 
-/* Navigation/TOC auch skalieren, aber kompaktere Zeilenhöhe */
-.md-header,
-.md-tabs,
-.md-footer,
-.md-nav--primary,
-.md-nav--secondary{
+/* Navigation/TOC/Header/Tabs/Footer  — kompaktere Zeilenhöhe */
+.md-header, .md-tabs, .md-footer, .md-nav--secondary{
   font-size: calc(1em * var(--user-font-scale));
   line-height: calc(1.3 * var(--user-lineheight-scale));
 }
 
-/* Überschriften im Content proportional mitziehen */
-.md-typeset h1{ font-size: calc(2rem * var(--user-font-scale)); }
+/* Linkes Menü (Primary) leicht größer für Lesbarkeit */
+.md-nav--primary{
+  font-size: calc(1em * var(--user-font-scale) * 1.06);
+  line-height: calc(1.3 * var(--user-lineheight-scale));
+}
+
+/* Überschriften im Content ziehen proportional mit */
+.md-typeset h1{ font-size: calc(2rem   * var(--user-font-scale)); }
 .md-typeset h2{ font-size: calc(1.3rem * var(--user-font-scale)); }
 .md-typeset h3{ font-size: calc(1.1rem * var(--user-font-scale)); }
 
-/* Sidebar-/TOC-Links: Umbruch sicherstellen */
+/* Sicherer Umbruch in Menüs */
 .md-nav__link{
   white-space: normal;
   overflow-wrap: anywhere;
@@ -47,29 +49,26 @@ body, .md-typeset{
 
 
 /* ===========================================================
-   0) Farb‑Tokens (Material: default/slate) + Aliasse
+   0b) Farb‑Tokens (Material: default/slate) + Aliasse
    =========================================================== */
 
-/* Helles Schema */
+/* Hell */
 [data-md-color-scheme="default"]{
   --md-primary-fg-color:           #B04F34; /* Marsrot */
   --md-primary-fg-color--light:    #C65B3C;
-  --md-primary-fg-color--dark:     #8E3F2A; /* für Suchfeld & Untermenüs */
+  --md-primary-fg-color--dark:     #8E3F2A; /* Suchfeld/Untermenüs */
   --md-accent-fg-color:            #8F9CA3; /* Kometensilber */
 
   --color-main:    var(--md-primary-fg-color);
   --color-accent:  var(--md-accent-fg-color);
 
   --on-main-dim:    rgba(0,0,0,.85);
-  --on-main-strong: #000;          /* Hell = Schwarz */
+  --on-main-strong: #000;
   --nav-text:       var(--md-default-fg-color);
   --link-color:     #0645AD;
-
-  --zoom-font: 1.08;
-  --zoom-font-active: 1.08;
 }
 
-/* Dunkles Schema */
+/* Dunkel */
 [data-md-color-scheme="slate"]{
   --md-primary-fg-color:           #B04F34;
   --md-primary-fg-color--light:    #D16651;
@@ -80,23 +79,21 @@ body, .md-typeset{
   --color-accent:  var(--md-accent-fg-color);
 
   --on-main-dim:    rgba(255,255,255,.90);
-  --on-main-strong: #fff;          /* Dunkel = Weiß */
+  --on-main-strong: #fff;
   --nav-text:       var(--md-default-fg-color);
   --link-color:     #90CAF9;
-
-  --zoom-font: 1.08;
-  --zoom-font-active: 1.08;
 }
 
 
 /* ===========================================================
    1) Header, Tabs, Footer – Grundlayout & Farben
    =========================================================== */
-.md-header,
-.md-tabs,
-.md-footer{ background-color: var(--color-main) !important; }
 
-/* Projektname, Buttons, Tabs: Text & Icons erben Modusfarbe */
+.md-header, .md-tabs, .md-footer{
+  background-color: var(--color-main) !important;
+}
+
+/* Text & Icons: Modusfarbe erben */
 .md-header .md-header__title,
 .md-header .md-header__title .md-ellipsis,
 .md-header a,
@@ -110,47 +107,33 @@ body, .md-typeset{
   stroke: currentColor !important;
 }
 
-/* Keine Farbänderung auf Hover/Klick im Header/Top-Menü */
-:where(.md-header a, .md-header__button, .md-tabs__link):hover,
-:where(.md-header a, .md-header__button, .md-tabs__link):active{
-  color: var(--on-main-strong) !important;
+/* ⬇ Bereichsweise Hover (kein globales Hover!) */
+.md-header a:hover,
+.md-header .md-header__button:hover{ color: var(--on-main-strong) !important; }
+
+.md-tabs__link:hover .md-ellipsis{
+  font-size: calc(1em * var(--zoom-font));
+  font-weight: 700;
+}
+.md-tabs__link--active .md-ellipsis{
+  font-size: calc(1em * var(--zoom-font-active));
+  font-weight: 700;
 }
 
-/* Tabs zweizeilig, nichts abschneiden */
+/* Tabs Zeilenumbruch */
 .md-tabs{ overflow: visible !important; }
 .md-tabs__list{
   display:flex !important; flex-wrap:wrap !important; justify-content:center !important;
   gap:.4rem .8rem !important; padding:.5rem 1rem !important;
 }
 .md-tabs__item{ flex:0 1 auto !important; max-width:none !important; }
-
-/* Tabs: feste Größe (keine Layout‑Shifts) */
 .md-tabs__link{
-  display:flex !important;
-  flex-direction:column !important;
-  align-items:center !important;
-  gap:.2rem !important;
-  padding:.6em .8em !important;
-  font-size:1rem !important;
-  line-height:1.25;
+  display:flex !important; flex-direction:column !important; align-items:center !important; gap:.2rem !important;
+  padding:.6em .8em !important; font-size:.75rem !important; line-height:1.2;
 }
+.md-tabs__link .md-icon{ font-size:1.4rem; margin-bottom:.2em; }
 
-/* Aktiver Tab dauerhaft fett – alle Varianten abgedeckt */
-.md-tabs__item--active > .md-tabs__link,
-.md-tabs__item--active > .md-tabs__link .md-ellipsis,
-.md-tabs__link--active,
-.md-tabs__link--active .md-ellipsis,
-.md-tabs__link[aria-current],
-.md-tabs__link[aria-current] .md-ellipsis{
-  font-weight: 700 !important;
-}
-
-/* Hover nur Gewicht → kein Springen */
-.md-tabs__link:hover{ font-weight:700 !important; }
-
-.md-tabs__link .md-icon{ font-size:1.45rem; margin-bottom:.2em; }
-
-/* Footer-Farben & Sichtbarkeit */
+/* Footer sichtbar & farblich konsistent */
 .md-footer,
 .md-footer__inner,
 .md-footer-nav,
@@ -163,13 +146,25 @@ body, .md-typeset{
   color: inherit !important; fill: currentColor !important; stroke: currentColor !important;
 }
 
-/* Nie horizontal clippen */
+/* Footer: eigene Hover‑Typo */
+.md-footer-nav__link .md-ellipsis,
+.md-footer__link .md-ellipsis,
+.md-footer-meta a .md-ellipsis{ transition: font-size .18s ease, font-weight .18s ease; }
+.md-footer-nav__link:hover .md-ellipsis,
+.md-footer__link:hover .md-ellipsis,
+.md-footer-meta a:hover .md-ellipsis{
+  font-size: calc(1em * var(--zoom-font));
+  font-weight: 700;
+}
+
+/* Sicherheitsnetz */
 .md-header, .md-footer{ overflow-x: hidden; }
 
 
 /* ===========================================================
-   2) Suche im Header – Pill
+   2) Suche im Header – Pill (nur Header‑Scope)
    =========================================================== */
+
 .md-header .md-search__form{
   background-color: var(--md-primary-fg-color--dark) !important;
   border-radius: 12px !important;
@@ -186,10 +181,9 @@ body, .md-typeset{
 
 
 /* ===========================================================
-   3) Sidebars & TOC – einheitliche Typo + Pills
+   3) Linkes Menü (Primary) – Pills + Hover (nur hier)
    =========================================================== */
 
-/* Linke Sidebar: Abschnittstitel (Pills) – identisch zur TOC-Titelgröße */
 .md-sidebar--primary .md-nav__item--section > label.md-nav__link,
 .md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index{
   background: var(--color-main) !important;
@@ -199,8 +193,6 @@ body, .md-typeset{
   width: 100% !important;
   box-sizing: border-box !important;
   transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
-  font-size: var(--primary-nav-title-size) !important;  /* <<< */
-  font-weight: 700;
 }
 .md-sidebar--primary .md-nav__item--section > label.md-nav__link:hover,
 .md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
@@ -209,17 +201,14 @@ body, .md-typeset{
   color: var(--on-main-strong) !important;
 }
 
-/* Linke Sidebar: Untermenü‑Abschnitte (2. Ebene) */
+/* Untermenüs */
 .md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link,
 .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
   background: var(--md-primary-fg-color--dark) !important;
   color: var(--on-main-dim) !important;
   border-radius: 12px !important;
   padding: .40rem .70rem !important;
-  box-sizing: border-box !important;
   transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
-  font-size: var(--primary-nav-title-size) !important;  /* <<< gleiche Größe wie rechts */
-  font-weight: 700;
 }
 .md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link:hover,
 .md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
@@ -227,28 +216,33 @@ body, .md-typeset{
   box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
   color: var(--on-main-strong) !important;
 }
-
 /* 3. Ebene leicht abgesetzt */
 .md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > label.md-nav__link,
 .md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
   background: color-mix(in srgb, var(--md-primary-fg-color--dark) 88%, #fff 12%) !important;
-  font-size: var(--primary-nav-title-size) !important;
+}
+
+/* Text‑Zoom nur in diesem Bereich */
+.md-sidebar--primary .md-nav__item > .md-nav__link .md-ellipsis{
+  transition: font-size .18s ease, font-weight .18s ease;
+}
+.md-sidebar--primary .md-nav__item > .md-nav__link:hover .md-ellipsis{
+  font-size: calc(1em * var(--zoom-font));
+  font-weight: 700;
+}
+.md-sidebar--primary .md-nav__item--active > .md-nav__link .md-ellipsis,
+.md-sidebar--primary .md-nav__link--active .md-ellipsis{
+  font-size: calc(1em * var(--zoom-font-active));
   font-weight: 700;
 }
 
-/* Linke Sidebar: normale Links (Einträge) – identisch zu TOC-Links */
-.md-sidebar--primary .md-nav__link{
-  color: var(--nav-text) !important;
-  background: transparent !important;
-  white-space: normal; overflow-wrap: anywhere; max-width: 100%;
-  font-size: var(--primary-nav-link-size) !important;   /* <<< */
-}
-.md-nav__link::before{ content:none !important; } /* Theme-Deko aus */
 
-/* Rechte Sidebar (TOC) im normalen Flow */
+/* ===========================================================
+   4) Rechte Sidebar (TOC) – Pill + Hover (nur hier)
+   =========================================================== */
+
 .md-sidebar--secondary, .md-nav--secondary{ overflow: visible; }
 
-/* TOC‑Titel als Pill – Größe belassen (1rem) */
 .md-nav--secondary .md-nav__title{
   background: var(--color-main) !important;
   color: var(--on-main-dim) !important;
@@ -258,7 +252,6 @@ body, .md-typeset{
   width: calc(100% - .75rem) !important;
   box-sizing: border-box !important;
   transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
-  /* Default-Schriftgröße der TOC-Titel ~1rem → passt zu --primary-nav-title-size */
 }
 .md-nav--secondary .md-nav__title:hover{
   padding: .50rem .90rem !important;
@@ -266,30 +259,7 @@ body, .md-typeset{
   color: var(--on-main-strong) !important;
 }
 
-
-/* ===========================================================
-   4) Lupen‑Effekte & Aktiv‑Zustände (keine Größe im Header/Tabs)
-   =========================================================== */
-.md-header a, .md-header__button, .md-tabs__link,
-.md-nav__link, .md-footer-nav__link, .md-footer__link, .md-footer-meta a{
-  transform: none !important;
-}
-
-/* LINKE SIDEBAR – sanfte Lupe nur im Text (optional) */
-.md-sidebar--primary .md-nav__item > .md-nav__link .md-ellipsis{
-  transition: font-size .18s ease, font-weight .18s ease;
-}
-.md-sidebar--primary .md-nav__item > .md-nav__link:hover .md-ellipsis{
-  font-size: calc(var(--primary-nav-link-size) * var(--zoom-font));
-  font-weight: 700;
-}
-.md-sidebar--primary .md-nav__item--active > .md-nav__link .md-ellipsis,
-.md-sidebar--primary .md-nav__link--active .md-ellipsis{
-  font-size: calc(var(--primary-nav-link-size) * var(--zoom-font-active));
-  font-weight: 700;
-}
-
-/* RECHTE SIDEBAR (TOC) – sanfte Lupe (lassen wir wie gehabt) */
+/* Text‑Zoom nur im TOC */
 .md-nav--secondary .md-nav__link .md-ellipsis{
   transition: font-size .18s ease, font-weight .18s ease;
 }
@@ -305,8 +275,9 @@ body, .md-typeset{
 
 
 /* ===========================================================
-   5) Überschriften
+   5) Content: Headlines + Boxen + Links
    =========================================================== */
+
 h1, h2, h3{ clear:both; font-weight:700; }
 h1{ margin:2.5rem 0 1.5rem; font-size:2rem; line-height:1.3; }
 h2{ margin:2rem 0 1.2rem !important; border-bottom:2px solid var(--color-main); padding-bottom:.3rem; }
@@ -314,11 +285,6 @@ h3{ margin:1.5rem 0 1rem !important; padding:0 0 .4rem .6rem !important; border-
 @media (max-width:768px){
   h1{ font-size:1.7rem; } h2{ font-size:1.3rem; } h3{ font-size:1.1rem; }
 }
-
-
-/* ===========================================================
-   6) Textblöcke (Standard & ausklappbar) + Admonitions
-   =========================================================== */
 
 /* Standard-Textblock */
 .textbox, .textblock{
@@ -330,7 +296,7 @@ h3{ margin:1.5rem 0 1rem !important; padding:0 0 .4rem .6rem !important; border-
 }
 @media (min-width:768px){ .textbox, .textblock{ max-width:800px; } }
 
-/* Ausklappbare Box (<details class="textbox|textblock">) */
+/* Ausklapp-Boxen */
 details.textbox, details.textblock{
   margin: 1.5rem auto; border:2px solid var(--color-accent); border-radius:8px; overflow:hidden; max-width:100%;
 }
@@ -346,30 +312,21 @@ details.textbox[open] summary::after, details.textblock[open] summary::after{ tr
 details.textbox > *:not(summary), details.textblock > *:not(summary){
   padding:1rem; background-color:var(--md-default-bg-color); color:var(--md-default-fg-color);
 }
-details.textbox[open], details.textbox[open]{ animation: tb-fadein .25s ease-in-out; }
-@keyframes tb-fadein{ from{opacity:0} to{opacity:1} }
 
-/* Admonitions (!!! info/tip/warning/danger/note) */
+/* Admonitions */
 .md-typeset .admonition,
 .md-typeset details.admonition{
   border:3px solid transparent; border-radius:8px; padding:1rem 1.5rem; margin:2rem 0;
   background-color:var(--md-default-bg-color); color:var(--md-default-fg-color);
 }
 .md-typeset .admonition-title{ font-weight:700; font-size:1rem; margin-bottom:.5rem; }
-.md-typeset .admonition.info{    border-color:var(--color-accent); }
-.md-typeset .admonition.tip{     border-color:#4CAF50; }
-.md-typeset .admonition.warning{ border-color:#FFA000; }
-.md-typeset .admonition.danger{  border-color:#C62828; }
-.md-typeset .admonition.note{    border-color:var(--md-default-fg-color); }
 
-
-/* ===========================================================
-   7) Medien & Content‑Links
-   =========================================================== */
+/* Medien & Content-Links */
 article img{ display:block; margin:1rem auto; max-width:80%; border-radius:.5rem; }
 video, iframe{ max-width:100%; width:100%; height:auto; display:block; margin:1rem auto; }
+.md-typeset a{ color: var(--link-color); }
 
-/* Bildbreiten‑Utilities */
+/* Bildbreiten-Utilities */
 .width25{ width:25% !important; margin-inline:auto; display:block; }
 .width33{ width:33% !important; margin-inline:auto; display:block; }
 .width50{ width:50% !important; margin-inline:auto; display:block; }
@@ -380,44 +337,62 @@ video, iframe{ max-width:100%; width:100%; height:auto; display:block; margin:1r
   .width25, .width33, .width50, .width66, .width75, .width90{ width:100% !important; }
 }
 
-/* Content‑Links im Fließtext */
-.md-typeset a{ color: var(--link-color); }
+
+/* ===========================================================
+   6) Slider: zentriert im Header, NICHT mitskalierend
+   =========================================================== */
+
+.md-header__inner{ position: relative; }
+
+.fs-ctrl-bar{
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  transform: translateX(-50%);
+  z-index: 5;                /* hoch, aber nicht deckend */
+  pointer-events: none;      /* nur die Controls selbst klickbar */
+  background: transparent;
+}
+
+.fs-ctrl{
+  pointer-events: auto;
+  display: inline-flex; align-items: center; gap: 8px;
+
+  font-size: 14px;     /* fix -> skaliert nicht mit */
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  background: var(--color-main);
+  color: var(--on-main-strong);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.12),
+    0 0 0 1px color-mix(in srgb, var(--on-main-strong) 10%, transparent) inset;
+}
+
+.fs-ctrl__label{ font-weight: 800; opacity: .95; user-select: none; }
+.fs-ctrl__range{ width: 180px; height: 20px; accent-color: var(--on-main-strong); }
+.fs-ctrl__btn{
+  appearance: none; border: 0; cursor: pointer;
+  padding: 6px 8px; border-radius: 6px; font-weight: 800;
+  color: var(--on-main-strong);
+  background: color-mix(in srgb, var(--on-main-strong) 10%, transparent);
+}
+.fs-ctrl__btn:focus-visible,
+.fs-ctrl__range:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--on-main-strong) 35%, transparent);
+  outline-offset: 2px;
+}
+
+/* sehr kleine Screens: ausblenden */
+@media (max-width: 420px){
+  .fs-ctrl-bar{ display: none; }
+}
 
 
 /* ===========================================================
-   8) Mobile‑Optimierung
+   7) Bewegungs-Reduktion respektieren
    =========================================================== */
-@media (hover:none) and (pointer:coarse){
-  a, button { -webkit-tap-highlight-color: rgba(0,0,0,0.08); }
-
-  /* Tabs – Touch: nur Gewicht */
-  .md-tabs__link:active{ font-weight:700 !important; }
-  .md-tabs__link--active{ font-weight:700 !important; }
-
-  /* Linke Sidebar – Touch-Lupe nur Text */
-  .md-sidebar--primary .md-nav__item > .md-nav__link .md-ellipsis{ transition: font-size .16s ease, font-weight .16s ease; }
-  .md-sidebar--primary .md-nav__item > .md-nav__link:active .md-ellipsis,
-  .md-sidebar--primary .md-nav__item > .md-nav__link:focus-visible .md-ellipsis{
-    font-size: calc(var(--primary-nav-link-size) * var(--zoom-font)); font-weight:700;
-  }
-  .md-sidebar--primary .md-nav__item--active > .md-nav__link .md-ellipsis,
-  .md-sidebar--primary .md-nav__link--active .md-ellipsis{
-    font-size: calc(var(--primary-nav-link-size) * var(--zoom-font-active)); font-weight:700;
-  }
-
-  /* Rechte Sidebar (TOC) – Touch-Lupe nur Text */
-  .md-nav--secondary .md-nav__link .md-ellipsis{ transition: font-size .16s ease, font-weight .16s ease; }
-  .md-nav--secondary .md-nav__link:active .md-ellipsis,
-  .md-nav--secondary .md-nav__link:focus-visible .md-ellipsis{
-    font-size: calc(1em * var(--zoom-font)); font-weight:700;
-  }
-  .md-nav--secondary .md-nav__item--active > .md-nav__link .md-ellipsis,
-  .md-nav--secondary .md-nav__link--active .md-ellipsis{
-    font-size: calc(1em * var(--zoom-font-active)); font-weight:700;
-  }
-}
-
-/* Bewegungs-Reduktion respektieren */
 @media (prefers-reduced-motion: reduce){
   .md-header a .md-ellipsis,
   .md-header__button .md-ellipsis,

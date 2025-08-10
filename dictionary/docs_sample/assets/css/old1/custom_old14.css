@@ -1,0 +1,344 @@
+/* ===========================================================
+   0) Farb-Tokens (Material: default/slate) + Aliasse
+   =========================================================== */
+
+/* Hell */
+[data-md-color-scheme="default"]{
+  --md-primary-fg-color:           #B04F34;
+  --md-primary-fg-color--light:    #C65B3C;
+  --md-primary-fg-color--dark:     #8E3F2A; /* Suchfeld & Untermenü */
+  --md-accent-fg-color:            #8F9CA3; /* Kometensilber (Reserve) */
+
+  --color-main:    var(--md-primary-fg-color);
+  --color-accent:  var(--md-accent-fg-color);
+
+  --on-main-dim:    rgba(0,0,0,.85);
+  --on-main-strong: #000000;
+  --nav-text:       var(--md-default-fg-color);
+  --link-color:     #0645AD;
+
+  /* Pills */
+  --pill-depth-1:   var(--color-main);                  /* Top-Level */
+  --pill-sub-bg-2:  var(--md-primary-fg-color--dark);   /* Untermenü = Suchfeld */
+  --pill-sub-bg-3:  color-mix(in srgb, var(--md-primary-fg-color--dark) 88%, #fff 12%);
+
+  /* Lupe */
+  --zoom-hover: 1.08;
+  --zoom-active: 1.08;
+}
+
+/* Dunkel */
+[data-md-color-scheme="slate"]{
+  --md-primary-fg-color:           #B04F34;
+  --md-primary-fg-color--light:    #D16651;
+  --md-primary-fg-color--dark:     #8E3F2A;
+  --md-accent-fg-color:            #B0BEC5;
+
+  --color-main:    var(--md-primary-fg-color);
+  --color-accent:  var(--md-accent-fg-color);
+
+  --on-main-dim:    rgba(255,255,255,.90);
+  --on-main-strong: #FFFFFF;
+  --nav-text:       var(--md-default-fg-color);
+  --link-color:     #90CAF9;
+
+  --pill-depth-1:   var(--color-main);
+  --pill-sub-bg-2:  var(--md-primary-fg-color--dark);
+  --pill-sub-bg-3:  color-mix(in srgb, var(--md-primary-fg-color--dark) 88%, #000 12%);
+
+  --zoom-hover: 1.08;
+  --zoom-active: 1.08;
+}
+
+
+/* ===========================================================
+   1) Header, Tabs, Footer – Grundlayout
+   =========================================================== */
+.md-header,
+.md-tabs,
+.md-footer{ background-color: var(--color-main) !important; }
+
+/* Projektname gut lesbar */
+.md-header__title,
+.md-header__topic,
+.md-header__title .md-ellipsis{ color: var(--on-main-strong) !important; }
+
+/* Tabs mehrzeilig */
+.md-tabs{ overflow: visible !important; }
+.md-tabs__list{
+  display:flex !important; flex-wrap:wrap !important; justify-content:center !important;
+  gap:.4rem .8rem !important; padding:.5rem 1rem !important;
+}
+.md-tabs__item{ flex:0 1 auto !important; max-width:none !important; }
+.md-tabs__link{
+  display:flex !important; flex-direction:column !important; align-items:center !important; gap:.2rem !important;
+  padding:.6em .8em !important; font-size:.75rem !important; line-height:1.2;
+}
+.md-tabs__link .md-icon{ font-size:1.4rem; margin-bottom:.2em; }
+
+/* Footer-Struktur */
+.md-footer,
+.md-footer__inner,
+.md-footer-nav,
+.md-footer-meta{
+  background-color: var(--color-main) !important; border-top:none !important;
+}
+.md-footer-nav{ display:flex !important; visibility:visible !important; opacity:1 !important; }
+.md-footer-nav__link, .md-footer-nav__button, .md-footer__link,
+.md-footer-nav__link *, .md-footer-nav__button *{
+  color: inherit !important; fill: currentColor !important; stroke: currentColor !important;
+}
+
+/* Kopf/Fuß: horizontales Clippen (falls irgendwas doch größer wird) */
+.md-header, .md-footer{ overflow-x: hidden; }
+
+
+/* ===========================================================
+   2) Suche im Header – Pill
+   =========================================================== */
+.md-header .md-search__form{
+  background-color: var(--md-primary-fg-color--dark) !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15) !important;
+}
+.md-header .md-search__input{ color: var(--on-main-dim) !important; }
+.md-header .md-search__icon { color: var(--on-main-dim) !important; }
+.md-header .md-search__input::placeholder{
+  color: color-mix(in srgb, var(--on-main-dim) 70%, transparent) !important;
+}
+.md-header .md-search__form:focus-within{
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--on-main-strong) 35%, transparent) !important;
+}
+
+
+/* ===========================================================
+   3) Sidebar & TOC – Pill‑Titel + Links
+   =========================================================== */
+
+/* Linke Sidebar: Abschnittstitel als Pill (Top-Level) */
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: var(--pill-depth-1) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  margin-right: 0 !important;
+  width: 100% !important;
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link:hover,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+
+/* Linke Sidebar: Untermenü‑Pills (Farbe wie Suchfeld) */
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: var(--pill-sub-bg-2) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link:hover,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+/* 3. Ebene leicht absetzen */
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: var(--pill-sub-bg-3) !important;
+}
+
+/* Rechte Sidebar (TOC): wieder im normalen Flow (keine Mini‑Scrollbox) */
+.md-sidebar--secondary, .md-nav--secondary{ overflow: visible; }
+
+/* TOC‑Titel als Pill (Padding‑Wachstum) */
+.md-nav--secondary .md-nav__title{
+  background: var(--pill-depth-1) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  margin: 0 .5rem 0 .25rem !important;
+  width: calc(100% - .75rem) !important;
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-nav--secondary .md-nav__title:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+
+
+/* ===========================================================
+   4) Hover/Aktiv – separat je Bereich, identisches Verhalten
+   (Lupe NUR am Text – .md-ellipsis – keine Breitenänderung)
+   =========================================================== */
+
+/* 4.0 Schutz: kein globales transform auf Links */
+.md-header a, .md-header__button, .md-tabs__link,
+.md-nav__link, .md-footer-nav__link, .md-footer__link, .md-footer-meta a{
+  transform:none !important;
+}
+
+/* 4.1 Header & Tabs (Mitte skalieren) */
+.md-header a .md-ellipsis,
+.md-header__button .md-ellipsis,
+.md-tabs__link .md-ellipsis{
+  display:inline-block; transition: transform .18s ease; transform-origin:center; will-change:transform;
+}
+.md-header a:hover .md-ellipsis,
+.md-header__button:hover .md-ellipsis,
+.md-tabs__link:hover .md-ellipsis{
+  transform: scale(var(--zoom-hover));
+}
+/* aktiv eingefroren */
+.md-tabs__link--active .md-ellipsis{
+  transform: scale(var(--zoom-active)); font-weight:700;
+}
+/* etwas höhere Tabs */
+.md-tabs__link{ padding-block:.55rem !important; }
+
+/* 4.2 Linke Sidebar (von links nach innen skalieren) */
+.md-sidebar--primary .md-nav__item > .md-nav__link{ overflow:hidden; }
+.md-sidebar--primary .md-nav__item > .md-nav__link .md-ellipsis{
+  display:inline-block; transition: transform .18s ease; transform-origin:left center; will-change:transform;
+}
+.md-sidebar--primary .md-nav__item > .md-nav__link:hover .md-ellipsis{
+  transform: scale(var(--zoom-hover));
+}
+.md-sidebar--primary .md-nav__item--active > .md-nav__link .md-ellipsis,
+.md-sidebar--primary .md-nav__link--active .md-ellipsis{
+  transform: scale(var(--zoom-active)); font-weight:700;
+}
+/* Pill-HÖHE leicht wachsen, BREITE fix */
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  padding-block:.45rem !important;
+}
+
+/* 4.3 Rechte Sidebar / TOC (von rechts nach innen skalieren) */
+.md-nav--secondary .md-nav__link{ overflow:hidden; }
+.md-nav--secondary .md-nav__link .md-ellipsis{
+  display:inline-block; transition: transform .18s ease; transform-origin:right center; will-change:transform;
+}
+.md-nav--secondary .md-nav__link:hover .md-ellipsis{
+  transform: scale(var(--zoom-hover));
+}
+.md-nav--secondary .md-nav__item--active > .md-nav__link .md-ellipsis,
+.md-nav--secondary .md-nav__link--active .md-ellipsis{
+  transform: scale(var(--zoom-active)); font-weight:700;
+}
+/* TOC-Titel: nur Höhe wachsen */
+.md-nav--secondary .md-nav__title{ padding-block:.45rem !important; }
+
+/* 4.4 Footer (Mitte skalieren) */
+.md-footer, .md-footer__inner, .md-footer-nav{ overflow-x:hidden; }
+.md-footer-nav__link .md-ellipsis,
+.md-footer__link .md-ellipsis,
+.md-footer-meta a .md-ellipsis{
+  display:inline-block; transition: transform .18s ease; transform-origin:center; will-change:transform;
+}
+.md-footer-nav__link:hover .md-ellipsis,
+.md-footer__link:hover .md-ellipsis,
+.md-footer-meta a:hover .md-ellipsis{
+  transform: scale(var(--zoom-hover));
+}
+/* gleiche vertikale Balance wie Tabs */
+.md-footer-nav__link{ padding-block:.55rem !important; }
+
+/* Material-Deko abschalten, die stören könnte */
+.md-nav__link::before{ content:none !important; }
+
+
+/* ===========================================================
+   5) Überschriften
+   =========================================================== */
+h1,h2,h3{ clear:both; }
+h2{ margin:4rem 0 2rem !important; border-bottom:2px solid var(--color-main); }
+h3{ margin:3rem 0 1rem !important; padding:0 0 .5rem .5rem !important; border-left:3px solid var(--color-accent); }
+
+
+/* ===========================================================
+   6) Textbox & Admonitions
+   =========================================================== */
+.textbox{
+  border:3px solid var(--color-main); background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color); padding:1rem 1.5rem; margin:2rem auto; border-radius:8px;
+  line-height:1.6; box-sizing:border-box; max-width:100%;
+}
+@media (min-width:768px){ .textbox{ max-width:800px; } }
+details.textbox summary{ cursor:pointer; font-weight:700; padding-bottom:.5rem; }
+details.textbox[open]{ animation:fadein .3s ease-in-out; }
+@keyframes fadein{ from{opacity:0;} to{opacity:1;} }
+
+.md-typeset .admonition,
+.md-typeset details.admonition{
+  border:3px solid transparent; border-radius:8px; padding:1rem 1.5rem; margin:2rem 0;
+  background-color:var(--md-default-bg-color); color:var(--md-default-fg-color);
+}
+.md-typeset .admonition-title{ font-weight:700; font-size:1rem; margin-bottom:.5rem; }
+.md-typeset .admonition.info{    border-color:var(--color-accent); }
+.md-typeset .admonition.tip{     border-color:var(--md-accent-fg-color); }
+.md-typeset .admonition.warning{ border-color:#FFA000; }
+.md-typeset .admonition.danger{  border-color:#C62828; }
+.md-typeset .admonition.note{    border-color:var(--md-default-fg-color); }
+
+
+/* ===========================================================
+   7) Medien & Content-Links
+   =========================================================== */
+article img{ display:block; margin:1rem auto; max-width:80%; border-radius:.5rem; }
+video, iframe{ max-width:100%; width:100%; height:auto; display:block; margin:1rem auto; }
+
+/* Utilities */
+.width25{ width:25% !important; margin-inline:auto; display:block; }
+.width33{ width:33% !important; margin-inline:auto; display:block; }
+.width50{ width:50% !important; margin-inline:auto; display:block; }
+.width66{ width:66% !important; margin-inline:auto; display:block; }
+.width75{ width:75% !important; margin-inline:auto; display:block; }
+.width90{ width:90% !important; margin-inline:auto; display:block; }
+@media (max-width:500px){
+  .width25, .width33, .width50, .width66, .width75, .width90{ width:100% !important; }
+}
+
+/* Content-Links */
+.md-typeset a{ color: var(--link-color); }
+
+
+/* ===========================================================
+   8) Fokus-Styles (A11y)
+   =========================================================== */
+:where(a, button, .md-nav__link, .md-tabs__link, .md-header__button, .md-search__form):focus-visible,
+:where(a, button, .md-nav__link, .md-tabs__link, .md-header__button, .md-search__form) :focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--on-main-strong) 35%, transparent);
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .md-header a:hover .md-ellipsis,
+  .md-header__button:hover .md-ellipsis,
+  .md-tabs__link:hover .md-ellipsis,
+  .md-footer-nav__link:hover .md-ellipsis,
+  .md-footer__link:hover .md-ellipsis,
+  .md-footer-meta a:hover .md-ellipsis,
+  .md-nav--primary .md-nav__link:hover .md-ellipsis,
+  .md-nav--secondary .md-nav__link:hover .md-ellipsis{
+    transform: none;
+  }
+  .md-tabs__link--active .md-ellipsis,
+  .md-nav--primary .md-nav__item--active > .md-nav__link .md-ellipsis,
+  .md-nav--secondary .md-nav__item--active > .md-nav__link .md-ellipsis{
+    transform: none;
+  }
+}

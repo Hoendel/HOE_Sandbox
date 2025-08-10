@@ -1,0 +1,162 @@
+/* ==============================
+   Farb-Definitionen
+   ============================== */
+
+/* Theme-Farben zentral setzen */
+[data-md-color-scheme="default"] {
+  --md-primary-fg-color: #B04F34;         /* Marsrot */
+  --md-primary-fg-color--light: #C65B3C;
+  --md-primary-fg-color--dark: #8E3F2A;
+
+  --md-accent-fg-color: #8F9CA3;          /* Kometensilber */
+
+  --color-main: var(--md-primary-fg-color);
+  --color-accent: var(--md-accent-fg-color);
+}
+
+[data-md-color-scheme="slate"] {
+  --md-primary-fg-color: #B04F34;
+  --md-primary-fg-color--light: #D16651;
+  --md-primary-fg-color--dark: #8E3F2A;
+
+  --md-accent-fg-color: #8F9CA3;
+
+  --color-main: var(--md-primary-fg-color);
+  --color-accent: var(--md-accent-fg-color);
+}
+
+/* ==============================
+   Header / Tabs / Footer
+   ============================== */
+
+/* Header-Leiste */
+.md-header {
+  background-color: var(--color-main) !important;
+  color: #fff;
+}
+
+/* Tabs unter Header */
+.md-tabs {
+  background-color: var(--color-main) !important;
+}
+
+/* Footer transparent machen */
+.md-footer {
+  background-color: transparent !important;
+  border-top: 2px solid var(--color-main);
+}
+
+/* Footer-Links */
+.md-footer a {
+  color: var(--color-accent) !important;
+}
+
+/* ==============================
+   Navigation links (Seitenmenü)
+   ============================== */
+
+/* Aktives Hauptmenü fett + Marsrot-Hintergrund */
+.md-nav__item--active > .md-nav__link {
+  font-weight: bold;
+  background-color: var(--color-main) !important;
+  color: #fff !important;
+  border-radius: 4px;
+}
+
+/* Hover-Effekt links */
+.md-nav__link:hover {
+  color: var(--color-accent) !important;
+}
+
+/* ==============================
+   TOC rechts (Inhaltsverzeichnis)
+   ============================== */
+
+/* TOC-Titel */
+.md-nav--secondary .md-nav__title {
+  background-color: var(--color-main);
+  color: #fff !important;
+  font-weight: bold;
+  padding: 0.5em;
+}
+
+/* Aktiver TOC-Link */
+.md-nav--secondary .md-nav__item--active > .md-nav__link {
+  color: var(--color-accent) !important;
+  font-weight: bold;
+}
+
+/* Hover-Effekt im TOC */
+.md-nav--secondary .md-nav__link:hover {
+  color: var(--color-accent) !important;
+}
+
+/* ==============================
+   Überschriften
+   ============================== */
+
+h1, h2, h3 {
+  clear: both;
+  color: inherit;
+}
+
+h2 {
+  margin: 4rem 0rem 2rem 0rem !important;
+  border-bottom: solid 2px var(--color-main);
+}
+
+h3 {
+  margin: 3rem 0rem 1rem 0rem !important;
+  padding-left: 0.5rem;
+  border-left: solid 4px var(--color-accent);
+}
+
+/* ==============================
+   Codeblöcke & Zitate
+   ============================== */
+
+blockquote {
+  border-left: 4px solid var(--color-main);
+  padding-left: 1em;
+  color: inherit;
+}
+
+/* ==============================
+   Textboxen / Admonitions
+   ============================== */
+
+/* Standardbox */
+.md-typeset .admonition {
+  border-left: 0.4rem solid var(--color-main);
+  border-radius: 6px;
+}
+
+/* Achtung (warning) */
+.md-typeset .admonition.warning {
+  border-color: #ff9800;
+}
+
+/* Info */
+.md-typeset .admonition.info {
+  border-color: var(--color-accent);
+}
+
+/* Ausklappboxen (details) */
+details {
+  border: 2px solid var(--color-main);
+  border-radius: 6px;
+  padding: 0.5em;
+}
+details[open] {
+  background-color: rgba(176, 79, 52, 0.05);
+}
+
+/* ==============================
+   Sonstiges
+   ============================== */
+
+/* Aktiver Text fett + Kometensilber */
+strong {
+  color: var(--color-accent);
+  font-weight: bold;
+}

@@ -63,10 +63,8 @@ markdown_extensions:
 extra_javascript:
   - "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.6/MathJax.js?config=TeX-MML-AM_CHTML"
   - "assets/js/body-quotient-calculator.js"
-  - "assets/js/scale.js"             # ← NEU: Schrift-Schieberegler
 
 extra_css:
-  - "assets/css/scale.css"
   - "assets/css/custom.css"
 
 # Weitere Metadaten
@@ -83,14 +81,15 @@ extra:
 # Navigation
 nav:
   - 🏠 Startseite:
-      - Willkommen: startseite/wilkommen.md
-      - Nie wieder !: startseite/nie_wieder.md
-      - Sound: startseite/sound.md
+    - Einleitung: index.md
+    - Nie wieder !: startseite/nie_wieder.md
+    - Sound: startseite/sound.md
 
   - 🧑‍🚀 Charakter & Regeln:
     - Charaktererstellung: rules/charaktererstellung.md
     - Charakterbögen: rules/charakterboegen.md
     - Regeln: rules/regeln.md
+
 
   - 📋 Spielleiterhilfen:
       - Vorbereitung: spielleiterhilfen/spielleiterhilfen.md

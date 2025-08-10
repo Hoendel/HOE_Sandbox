@@ -1,0 +1,303 @@
+/* ===========================================================
+   0) Farb-Tokens (Material: default/slate) + Aliasse
+   =========================================================== */
+
+/* Hell */
+[data-md-color-scheme="default"]{
+  --md-primary-fg-color:           #B04F34;
+  --md-primary-fg-color--light:    #C65B3C;
+  --md-primary-fg-color--dark:     #8E3F2A;
+  --md-accent-fg-color:            #8F9CA3;   /* Kometensilber */
+
+  --color-main:    var(--md-primary-fg-color);
+  --color-accent:  var(--md-accent-fg-color);
+
+  --on-main-dim:    rgba(0,0,0,.85);
+  --on-main-strong: #000000;
+  --nav-text:       var(--md-default-fg-color);
+  --link-color:     #0645AD;
+
+  /* Kometensilber für Hover/Active */
+  --silver-hover:  color-mix(in srgb, var(--md-accent-fg-color) 85%, #ffffff 15%);
+  --silver-active: color-mix(in srgb, var(--md-accent-fg-color) 92%, #ffffff 8%);
+
+  /* Pill-Farben für Tiefen (Sections) */
+  --pill-depth-1:  var(--color-main);
+  --pill-depth-2:  color-mix(in srgb, var(--color-main) 88%, #ffffff 12%);
+  --pill-depth-3:  color-mix(in srgb, var(--color-main) 76%, #ffffff 24%);
+}
+
+/* Dunkel */
+[data-md-color-scheme="slate"]{
+  --md-primary-fg-color:           #B04F34;
+  --md-primary-fg-color--light:    #D16651;
+  --md-primary-fg-color--dark:     #8E3F2A;
+  --md-accent-fg-color:            #B0BEC5;
+
+  --color-main:    var(--md-primary-fg-color);
+  --color-accent:  var(--md-accent-fg-color);
+
+  --on-main-dim:    rgba(255,255,255,.90);
+  --on-main-strong: #FFFFFF;
+  --nav-text:       var(--md-default-fg-color);
+  --link-color:     #90CAF9;
+
+  --silver-hover:  color-mix(in srgb, var(--md-accent-fg-color) 85%, #000000 15%);
+  --silver-active: color-mix(in srgb, var(--md-accent-fg-color) 92%, #000000 8%);
+
+  --pill-depth-1:  var(--color-main);
+  --pill-depth-2:  color-mix(in srgb, var(--color-main) 88%, #000000 12%);
+  --pill-depth-3:  color-mix(in srgb, var(--color-main) 76%, #000000 24%);
+}
+
+
+/* ===========================================================
+   1) Header, Tabs, Footer – Grundlayout
+   =========================================================== */
+
+.md-header,
+.md-tabs,
+.md-footer{ background-color: var(--color-main) !important; }
+
+/* Header-Brand (Projektname) – gut lesbar pro Scheme */
+.md-header__title,
+.md-header__topic,
+.md-header__title .md-ellipsis{
+  color: var(--on-main-strong) !important;   /* hell: schwarz, dunkel: weiß */
+}
+
+/* zweizeilige Tabs */
+.md-tabs{ overflow: visible !important; }
+.md-tabs__list{
+  display:flex !important; flex-wrap:wrap !important; justify-content:center !important;
+  gap:.4rem .8rem !important; padding:.5rem 1rem !important;
+}
+.md-tabs__item{ flex:0 1 auto !important; max-width:none !important; }
+.md-tabs__link{
+  display:flex !important; flex-direction:column !important; align-items:center !important; gap:.2rem !important;
+  padding:.6em .8em !important; font-size:.75rem !important; line-height:1.2;
+}
+.md-tabs__link .md-icon{ font-size:1.4rem; margin-bottom:.2em; }
+
+/* Footer-Grundlage */
+.md-footer,
+.md-footer__inner,
+.md-footer-nav,
+.md-footer-meta{
+  background-color: var(--color-main) !important; border-top:none !important;
+}
+.md-footer-nav{ display:flex !important; visibility:visible !important; opacity:1 !important; }
+.md-footer-nav__link, .md-footer-nav__button, .md-footer__link,
+.md-footer-nav__link *, .md-footer-nav__button *{
+  color: inherit !important; fill: currentColor !important; stroke: currentColor !important;
+}
+
+
+/* ===========================================================
+   2) Suche im Header – Pill
+   =========================================================== */
+.md-header .md-search__form{
+  background-color: var(--md-primary-fg-color--dark) !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.15) !important;
+}
+.md-header .md-search__input{ color: var(--on-main-dim) !important; }
+.md-header .md-search__icon { color: var(--on-main-dim) !important; }
+.md-header .md-search__input::placeholder{
+  color: color-mix(in srgb, var(--on-main-dim) 70%, transparent) !important;
+}
+.md-header .md-search__form:focus-within{
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--on-main-strong) 35%, transparent) !important;
+}
+
+
+/* ===========================================================
+   3) Sidebar & TOC – Pill-Titel (wachsen ohne Clipping) + Links
+   =========================================================== */
+
+/* Linke Sidebar: Abschnittstitel als Pill (Label oder Link) – Tiefe 1 */
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  background: var(--pill-depth-1) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  margin-right: .5rem !important;            /* Luft zur Scrollkante */
+  box-sizing: border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link:hover,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index:hover{
+  padding: .50rem .90rem !important;         /* wirkt „größer“ ohne transform */
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+
+/* Linke Sidebar: verschachtelte Abschnittstitel (Tiefe 2/3) */
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section > label.md-nav__link{
+  background: var(--pill-depth-2) !important;
+}
+.md-sidebar--primary .md-nav__item--section .md-nav__item--section .md-nav__item--section > label.md-nav__link{
+  background: var(--pill-depth-3) !important;
+}
+
+/* Rechte Sidebar (TOC): Container ohne Schieber/Clipping */
+.md-sidebar--secondary,
+.md-nav--secondary{
+  overflow-x: hidden;        /* keine horizontale Scrollbar */
+  overflow-y: auto;
+}
+
+/* TOC-Titel als Pill, wächst per Padding */
+.md-nav--secondary .md-nav__title{
+  background: var(--pill-depth-1) !important;
+  color: var(--on-main-dim) !important;
+  border-radius: 12px !important;
+  padding: .40rem .70rem !important;
+  margin-right:.5rem !important;
+  margin-left:.25rem !important;
+  box-sizing:border-box !important;
+  transition: padding .16s ease, box-shadow .16s ease, color .16s ease;
+}
+.md-nav--secondary .md-nav__title:hover{
+  padding: .50rem .90rem !important;
+  box-shadow: 0 0 0 .15rem rgba(0,0,0,0.06);
+  color: var(--on-main-strong) !important;
+}
+
+/* Basislinks in beiden Sidebars */
+.md-nav--primary .md-nav__link,
+.md-nav--secondary .md-nav__link{
+  color: var(--nav-text) !important; background: transparent !important; border-radius:0 !important;
+}
+.md-nav__link::before{ content:none !important; }
+
+/* Mobil: Drawer farbig, Desktop transparent */
+.md-sidebar--primary, .md-nav__source{ background-color: var(--color-main) !important; }
+@media (min-width:60em){ .md-sidebar--primary{ background-color: transparent !important; }}
+
+
+/* ===========================================================
+   4) Einheitlicher Hover + Aktiver Zustand (alle Menüs)
+   =========================================================== */
+
+/* Basis (Transition) */
+:where(
+  .md-header a, .md-header__button, .md-tabs__link,                /* Kopf */
+  .md-nav--primary .md-nav__link, .md-nav--secondary .md-nav__link,/* Sidebars + TOC */
+  .md-footer-nav__link, .md-footer-nav__button, .md-footer__link, .md-footer-meta a  /* Footer */
+){
+  transition: transform .18s ease, color .18s ease, text-shadow .18s ease;
+  transform-origin: center;
+}
+
+/* Hover: Lupe + Kometensilber (überall) */
+:where(
+  .md-header a, .md-header__button, .md-tabs__link,
+  .md-nav--primary .md-nav__link, .md-nav--secondary .md-nav__link,
+  .md-footer-nav__link, .md-footer-nav__button, .md-footer__link, .md-footer-meta a
+):hover{
+  transform: scale(1.10);
+  color: var(--silver-hover) !important;
+  text-shadow: 0 0 .30em color-mix(in srgb, var(--md-accent-fg-color) 30%, transparent);
+}
+
+/* Aktiv: „eingefrorene“ Lupe + Kometensilber */
+:where(
+  .md-tabs__link--active,
+  .md-nav--primary .md-nav__item--active > .md-nav__link,
+  .md-nav--secondary .md-nav__item--active > .md-nav__link,
+  .md-nav--primary .md-nav__link--active,
+  .md-nav--secondary .md-nav__link--active
+){
+  transform: scale(1.10);
+  color: var(--silver-active) !important;
+  font-weight: 700 !important;
+}
+
+/* Basisfarbe der Links auf farbigen Balken (Kopf/Foot), damit Hover/Active abheben */
+.md-header :is(a, .md-header__button),
+.md-tabs   .md-tabs__link,
+.md-footer :is(.md-footer-nav__link, .md-footer-nav__button, .md-footer__link, .md-footer-meta a){
+  color: var(--on-main-dim) !important;
+  text-decoration: none !important; background: transparent !important; box-shadow:none !important;
+}
+
+
+/* ===========================================================
+   5) Überschriften
+   =========================================================== */
+h1,h2,h3{ clear:both; }
+h2{ margin:4rem 0 2rem !important; border-bottom:2px solid var(--color-main); }
+h3{ margin:3rem 0 1rem !important; padding:0 0 .5rem .5rem !important; border-left:3px solid var(--color-accent); }
+
+
+/* ===========================================================
+   6) Textbox & Admonitions
+   =========================================================== */
+.textbox{
+  border:3px solid var(--color-main); background-color: var(--md-default-bg-color);
+  color: var(--md-default-fg-color); padding:1rem 1.5rem; margin:2rem auto; border-radius:8px;
+  line-height:1.6; box-sizing:border-box; max-width:100%;
+}
+@media (min-width:768px){ .textbox{ max-width:800px; } }
+details.textbox summary{ cursor:pointer; font-weight:700; padding-bottom:.5rem; }
+details.textbox[open]{ animation:fadein .3s ease-in-out; }
+@keyframes fadein{ from{opacity:0;} to{opacity:1;} }
+
+.md-typeset .admonition,
+.md-typeset details.admonition{
+  border:3px solid transparent; border-radius:8px; padding:1rem 1.5rem; margin:2rem 0;
+  background-color:var(--md-default-bg-color); color:var(--md-default-fg-color);
+}
+.md-typeset .admonition-title{ font-weight:700; font-size:1rem; margin-bottom:.5rem; }
+.md-typeset .admonition.info{    border-color:var(--color-accent); }
+.md-typeset .admonition.tip{     border-color:var(--md-accent-fg-color); }
+.md-typeset .admonition.warning{ border-color:#FFA000; }
+.md-typeset .admonition.danger{  border-color:#C62828; }
+.md-typeset .admonition.note{    border-color:var(--md-default-fg-color); }
+
+
+/* ===========================================================
+   7) Medien & Content-Links
+   =========================================================== */
+article img{ display:block; margin:1rem auto; max-width:80%; border-radius:.5rem; }
+video, iframe{ max-width:100%; width:100%; height:auto; display:block; margin:1rem auto; }
+
+/* Utilities */
+.width25{ width:25% !important; margin-inline:auto; display:block; }
+.width33{ width:33% !important; margin-inline:auto; display:block; }
+.width50{ width:50% !important; margin-inline:auto; display:block; }
+.width66{ width:66% !important; margin-inline:auto; display:block; }
+.width75{ width:75% !important; margin-inline:auto; display:block; }
+.width90{ width:90% !important; margin-inline:auto; display:block; }
+@media (max-width:500px){
+  .width25, .width33, .width50, .width66, .width75, .width90{ width:100% !important; }
+}
+
+/* Content-Links */
+.md-typeset a{ color: var(--link-color); }
+
+
+/* ===========================================================
+   8) Fokus-Styles (A11y)
+   =========================================================== */
+:where(a, button, .md-nav__link, .md-tabs__link, .md-header__button, .md-search__form):focus-visible,
+:where(a, button, .md-nav__link, .md-tabs__link, .md-header__button, .md-search__form) :focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--on-main-strong) 35%, transparent);
+  outline-offset: 2px;
+  box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce){
+  :where(
+    .md-header a, .md-header__button, .md-tabs__link,
+    .md-nav--primary .md-nav__link, .md-nav--secondary .md-nav__link,
+    .md-footer-nav__link, .md-footer-nav__button, .md-footer__link, .md-footer-meta a
+  ){ transition: color .15s ease; }
+  :where(
+    .md-header a, .md-header__button, .md-tabs__link,
+    .md-nav--primary .md-nav__link, .md-nav--secondary .md-nav__link,
+    .md-footer-nav__link, .md-footer-nav__button, .md-footer__link, .md-footer-meta a
+  ):hover{ transform:none; text-shadow:none; }
+}

@@ -1,0 +1,108 @@
+/* =========================================
+   Globale Skalierung (Schrift & Grid)
+   ========================================= */
+
+/* 1.00 = 100%. Der JS-Default ist 1.20 (größer). */
+:root{
+  --layout-scale: 1.00;
+  --grid-base: 61rem; /* Material-Default für max. Content-Breite */
+}
+
+/* Schriftgröße skaliert alles in rem (Material nutzt rem) */
+html{ font-size: calc(100% * var(--layout-scale)); }
+
+/* Grid-Breite proportional mitskalieren (optional) */
+@media (min-width: 76.25em){
+  .md-grid{ max-width: calc(var(--grid-base) * var(--layout-scale)); }
+}
+
+/* =========================================
+   Schieberegler: im Header, mittig, NICHT mitskalierend
+   ========================================= */
+
+/* Header als Positionierungs-Context */
+.md-header__inner{ position: relative; }
+
+/* kein eigener Balken mehr über dem Header */
+.scale-ctrl-bar{
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9;           /* über Header-Inhalt */
+  pointer-events: none; /* Durchlass außer auf dem Widget */
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Kontrollelement – feste px Maße, daher nicht layout-abhängig */
+.scale-ctrl{
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: 14px;         /* fix -> skaliert nicht mit */
+  line-height: 1;
+  padding: 6px 10px;
+  border-radius: 8px;
+
+  background: var(--color-main);
+  color: var(--on-main-strong);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,.12),
+    0 0 0 1px color-mix(in srgb, var(--on-main-strong) 10%, transparent) inset;
+}
+
+.scale-ctrl__label{
+  font-weight: 800;
+  opacity: .95;
+  user-select: none;
+}
+
+.scale-ctrl__range{
+  width: 180px;
+  height: 20px;
+  accent-color: var(--on-main-strong);
+}
+
+.scale-ctrl__btn{
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  padding: 6px 8px;
+  border-radius: 6px;
+  font-weight: 800;
+  color: var(--on-main-strong);
+  background: color-mix(in srgb, var(--on-main-strong) 10%, transparent);
+}
+
+.scale-ctrl__btn:focus-visible,
+.scale-ctrl__range:focus-visible{
+  outline: 2px solid color-mix(in srgb, var(--on-main-strong) 35%, transparent);
+  outline-offset: 2px;
+}
+
+/* Auf sehr kleinen Screens ausblenden, wenn es eng wird */
+@media (max-width: 420px){
+  .scale-ctrl-bar{ display: none; }
+}
+
+/* =========================================
+   Typo-Angleich: Linkes Menü (=Primary Sidebar)
+   gleich groß wie TOC rechts
+   ========================================= */
+
+.md-sidebar--primary{ font-size: 1rem; } /* Basis für die gesamte Leiste */
+
+.md-sidebar--primary .md-nav__link,
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link,
+.md-sidebar--primary .md-nav__item--section > .md-nav__link.md-nav__link--index{
+  font-size: 1rem; /* Angleichen an TOC */
+}
+
+/* kleine Geräte: minimal kompakter */
+@media (max-width: 1000px){
+  .md-sidebar--primary,
+  .md-sidebar--primary .md-nav__link{ font-size: .95rem; }
+}

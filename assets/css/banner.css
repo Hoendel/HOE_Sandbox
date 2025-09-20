@@ -1,0 +1,114 @@
+/* ============================================================
+   assets/css/banner.css  —  Vollständige Version (Desktop-Banner)
+   - Mobile/Tablet (≤1219.98px): KEIN Banner (bzw. sicher hinter dem Drawer)
+   - Desktop (≥1220px): fixer, zentrierter Banner über dem Header
+   - Header & Inhalt werden auf Desktop unter den Banner geschoben
+   - Zusätzlich: Auf Desktop Projekt-Titel ausblenden, Seitentitel immer zeigen
+   ============================================================ */
+
+/* Basis-Variablen */
+:root{
+  --nand-banner-height: 44px;          /* Bannerhöhe Desktop */
+  --nand-banner-font-size: 1.25rem;    /* ≙ Header-Titelgröße */
+}
+
+/* ------------------------------------------------------------
+   MOBILE/TABLET (Default) – Banner aus
+   ------------------------------------------------------------ */
+[data-nand-fixed-banner]{ display: none !important; }
+
+/* Dismiss-Elemente sicher verstecken (alle Viewports) */
+[data-md-banner-dismiss],
+[data-nand-fixed-banner] .md-banner__close,
+[data-md-component="announce"] .md-button--close{
+  display: none !important;
+}
+
+/* Sicherheitsnetz: falls der Banner zwischen 960–1229px doch existiert,
+   liegt er hinter dem Drawer und fängt keine Klicks ab; bei offenem Drawer
+   wird er ganz ausgeblendet. */
+@media (max-width: 1219.98px){
+  [data-nand-fixed-banner],
+  .md-banner,
+  [data-md-component="announce"]{
+    z-index: 100 !important;    /* deutlich unter Header/Drawer/Overlay */
+    pointer-events: none !important;
+  }
+  #__drawer:checked ~ .md-container [data-nand-fixed-banner],
+  #__drawer:checked ~ .md-container .md-banner,
+  #__drawer:checked ~ .md-container [data-md-component="announce"]{
+    display: none !important;
+  }
+}
+
+/* ------------------------------------------------------------
+   DESKTOP – Banner an (erst ab 1220px)
+   ------------------------------------------------------------ */
+@media (min-width: 1220px){
+
+  /* Fixe Banner-Leiste oben */
+  [data-nand-fixed-banner]{
+    display: flex !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: var(--nand-banner-height) !important;
+    z-index: 1100 !important; /* über dem Header */
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 12px !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    background: var(--md-primary-fg-color) !important;
+    color: var(--md-primary-bg-color) !important;
+  }
+
+  /* Inhalt wirklich mittig, ohne Seiteneinfluss */
+  [data-nand-fixed-banner] .md-banner__inner{
+    display: block !important;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    background: transparent !important;
+    text-shadow: none !important;
+    -webkit-text-stroke: 0 !important;
+  }
+
+  /* Typo im Banner = Header-Titel (Größe/Gewicht) */
+  .nand-banner-typo{
+    font-family: var(--md-text-font, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell,
+                     Noto Sans, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol) !important;
+    font-weight: 700 !important;
+    font-size: var(--nand-banner-font-size) !important;
+    line-height: 1.25 !important;
+    letter-spacing: .01em !important;
+  }
+
+  /* Header & Inhalt unter den fixen Banner schieben */
+  .md-header{ top: var(--nand-banner-height) !important; }
+  .md-main  { margin-top: var(--nand-banner-height) !important; }
+
+  /* Nette Anker-Sprünge */
+  .md-typeset h1[id], .md-typeset h2[id], .md-typeset h3[id],
+  .md-typeset h4[id], .md-typeset h5[id], .md-typeset h6[id]{
+    scroll-margin-top: calc(var(--nand-banner-height) + 16px) !important;
+  }
+
+  /* ===== Desktop: Projekt ausblenden, Seitentitel immer zeigen =====
+     In Material stehen zwei "Topics" im Header-Titel:
+     1) Projektname (site_name)  → wird versteckt
+     2) Seitentitel (page.title) → bleibt sichtbar */
+  .md-header__title .md-header__topic:first-of-type{
+    display: none !important;          /* Projekt weg */
+  }
+  .md-header__title .md-header__topic:last-of-type{
+    display: inline !important;        /* Seitentitel zeigen */
+    opacity: 1 !important;             /* evtl. Animationszustände neutralisieren */
+    transform: none !important;
+  }
+}

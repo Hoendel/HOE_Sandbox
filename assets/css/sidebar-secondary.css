@@ -1,0 +1,113 @@
+/* ===========================================================
+   Rechte Sidebar (Secondary / TOC)
+   - identischer Sticky-Offset wie links
+   - TOC-Titel = Vollton-Marsrot-Pille (Header-Farbton)
+   - TOC-Links:
+       • Hover  → Kometen-Silber (wie links)
+       • Aktiv  → Marsrot
+   =========================================================== */
+
+/* Gleiche Offset-Logik wie links */
+:root{
+  --nand-sticky-top: var(--aa-top, 64px);
+}
+@media (min-width: 1230px){
+  :root{ --nand-sticky-top: calc(var(--aa-top, 64px) + var(--aa-toolbar-h, 40px)); }
+}
+
+/* Gemeinsame Werte (Fallbacks; übernehmen die aus Primary, falls gesetzt) */
+:root{
+  --sticky-safety: 8px;
+
+  --pill-radius: var(--nav-link-radius, 10px);
+  --pill-pad-y:  var(--nav-link-pad-y, .35rem);
+  --pill-pad-x:  var(--nav-link-pad-x, .40rem);
+
+  /* Farben */
+  --toc-title-bg:     var(--md-primary-fg-color);     /* Vollton Marsrot (Pille) */
+  --toc-title-fg:     var(--md-primary-bg-color);     /* Kontrast-Text (auto sw/ws) */
+  --toc-link-active:  var(--md-primary-fg-color);     /* Marsrot (aktiv) */
+  --toc-link-hover:   var(--md-accent-fg-color);      /* Kometen-Silber (hover) */
+}
+
+@media (min-width: 1230px){
+
+  /* Sticky + eigener Scrollbereich */
+  .md-sidebar--secondary{
+    position: sticky !important;
+    top:    calc(var(--nand-sticky-top) + var(--sticky-safety)) !important;
+    height: calc(100vh - (var(--nand-sticky-top) + var(--sticky-safety))) !important;
+    overflow: auto !important;
+    align-self: start;
+  }
+
+  /* Lange TOC-Einträge dürfen umbrechen */
+  .md-sidebar--secondary .md-ellipsis{
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+  }
+
+  /* ===== TOC-Titel als Vollton-Pille ===== */
+  .md-nav--secondary .md-nav__title{
+    display: block;
+    box-sizing: border-box;
+    border-radius: var(--pill-radius) !important;
+    padding: var(--pill-pad-y) var(--pill-pad-x) !important;
+    line-height: 1.25 !important;
+    font-weight: 700 !important;
+
+    background: var(--toc-title-bg) !important;
+    color: var(--toc-title-fg) !important;
+
+    margin: 0 0 .5rem 0 !important;
+  }
+
+  /* ===== TOC-Links: textbasiert ===== */
+  .md-nav--secondary .md-nav__link{
+    text-decoration: none !important;
+    transition: color .18s ease, font-weight .18s ease;
+    color: inherit;                     /* Basisfarbe vom Theme */
+  }
+
+  /* Hover: Kometen-Silber (Text & Icon) → höhere Spezifität erzwingen */
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:hover,
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:hover .md-ellipsis,
+  .md-sidebar--secondary .md-nav--secondary .md-nav__link:hover .md-icon{
+    color: var(--toc-link-hover) !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+    font-weight: 700 !important;
+  }
+
+  /* Aktiv: Marsrot (Text & Icon) */
+  .md-nav--secondary .md-nav__item--active  > .md-nav__link .md-ellipsis,
+  .md-nav--secondary .md-nav__link--active  .md-ellipsis,
+  .md-nav--secondary .md-nav__link[aria-current] .md-ellipsis{
+    color: var(--toc-link-active) !important;
+    font-weight: 700 !important;
+  }
+  .md-nav--secondary .md-nav__item--active  > .md-nav__link .md-icon,
+  .md-nav--secondary .md-nav__link--active  .md-icon,
+  .md-nav--secondary .md-nav__link[aria-current] .md-icon{
+    color: var(--toc-link-active) !important;
+    fill: currentColor !important;
+    stroke: currentColor !important;
+  }
+
+  /* (Optional – TOC-Links als Pillen)
+  .md-nav--secondary .md-nav__link{
+    border-radius: 8px;
+    padding: .25rem .4rem;
+  }
+  .md-nav--secondary .md-nav__link:hover{
+    background: var(--toc-title-bg);
+    color: var(--toc-title-fg);
+  }
+  .md-nav--secondary .md-nav__link[aria-current]{
+    background: var(--toc-title-bg);
+    color: var(--toc-title-fg);
+    font-weight: 700;
+  }
+  */
+}

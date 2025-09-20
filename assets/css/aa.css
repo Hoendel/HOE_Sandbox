@@ -1,0 +1,89 @@
+/* ============================================================
+   aa.css – aA-Toolbar FIXED direkt unter dem Header
+   - Mobile: ausgeblendet (Material-Standard)
+   - Desktop: fixiert, vollbreit, zentrierte Controls
+   - Wirkung: Content 100% skaliert, Menü 50% der Stärke (nur Faktor)
+   ============================================================ */
+
+/* Variablen (werden von aa.js laufend aktualisiert) */
+:root{
+  --aa-top: 64px;                 /* Headerhöhe + evtl. Banner-Offset (aa.js setzt das) */
+  --aa-toolbar-h: 40px;           /* Toolbar-Höhe */
+  --aa-content-scale: 1;          /* 1.00 = 100% (vom Slider per JS gesetzt) */
+  --aa-nav-scale: 1;              /* 1.00 = 100% (Menü = 50% der Content-Stärke) */
+}
+
+/* Mobile: Toolbar komplett aus */
+#aa-toolbar{ display: none; }
+
+@media (min-width: 1230px){
+  /* FIXED an den Header andocken */
+  #aa-toolbar{
+    position: fixed;
+    top: var(--aa-top);
+    /* anti-gap: 1px Überlappung, falls Browser subpixelrundet */
+    margin-top: -1px;
+    left: 0;
+    right: 0;
+    height: var(--aa-toolbar-h);
+    z-index: 1099;                         /* unter Header (~1100), über Content */
+    display: grid;
+    place-items: center;
+    background: var(--md-primary-fg-color);
+    color: var(--md-primary-bg-color);
+    border: 0;
+    box-shadow: none;
+  }
+
+  .aa-wrap{
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    width: min(1100px, 96vw);
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .aa-label{
+    font-weight: 700;
+    font-size: 1rem;
+    opacity: .9;
+  }
+
+  .aa-range{
+    width: min(520px, 60vw);
+    height: 6px;
+  }
+
+  .aa-btn{
+    inline-size: 34px;
+    block-size: 28px;
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid color-mix(in srgb, var(--md-primary-bg-color) 30%, transparent);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    user-select: none;
+  }
+  .aa-btn:hover{ background: color-mix(in srgb, var(--md-primary-bg-color) 12%, transparent); }
+  .aa-reset{ width: 40px; }
+
+  .aa-value{ min-width: 3.5ch; text-align: right; font-variant-numeric: tabular-nums; }
+
+  /* Content-Abstand: unter Toolbar starten
+     (Banner-Abstand kommt bereits über den Header-Top-Offset) */
+  .md-main{
+    margin-top: calc(var(--nand-banner-height, 0px) + var(--aa-toolbar-h)) !important;
+  }
+}
+
+/* ====== Faktor für Menü/Tabs (50 % der Content-Stärke) ====== */
+.md-nav,
+.md-tabs{
+  font-size: calc(1em * var(--aa-nav-scale, 1)) !important;
+}
+
+/* Safety */
+#aa-toolbar, .md-header{ will-change: auto; }

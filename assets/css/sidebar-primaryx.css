@@ -1,0 +1,195 @@
+/* ===========================================================
+   Linke Sidebar (Primary)
+   - Funktion wie gehabt (Sticky, aA-Umbruch)
+   - Farbregeln: Top-Level = Pille, Untermenüs = nur Text
+   =========================================================== */
+
+/* Effektiver Sticky-Offset (Mobile: Header; Desktop: Header+Toolbar) */
+:root{
+  --nand-sticky-top: var(--aa-top, 64px);
+}
+@media (min-width: 1230px){
+  :root{ --nand-sticky-top: calc(var(--aa-top, 64px) + var(--aa-toolbar-h, 40px)); }
+}
+
+/* Breite & Optik-Grundwerte */
+:root{
+  --sidebar-fluid-min: 13.5rem;
+  --sidebar-fluid-vw:  16vw;
+  --sidebar-fluid-max: 30rem;
+
+  --sticky-safety: 8px;
+  --sidebar-edge-shift: -1.0rem;
+
+  /* Pille-Geometrie */
+  --nav-link-radius: 10px;
+  --nav-link-pad-y:  .35rem;
+  --nav-link-pad-x:  .40rem;
+
+  /* Farbzuweisungen (kommen aus tokens.css) */
+  --section-bg:         var(--md-primary-fg-color);        /* Marsrot (Header-Ton)                */
+  --section-bg--nested: var(--md-primary-fg-color--dark);  /* dunkler für verschachtelte Gruppen  */
+  --section-fg:         var(--md-primary-bg-color);        /* Textfarbe auf Pille (hell/dunkel)   */
+  --link-accent:        var(--md-primary-fg-color);        /* Textlinks in Untermenüs (Hover/Act) */
+}
+
+/* ===================== DESKTOP (≥1230px) ===================== */
+@media (min-width: 1230px){
+
+  /* Breite durchreichen (clamp) */
+  :root{
+    --md-sidebar-width: clamp(var(--sidebar-fluid-min),
+                              var(--sidebar-fluid-vw),
+                              var(--sidebar-fluid-max)) !important;
+  }
+
+  /* Grid: Primary | Content | Secondary */
+  .md-main__inner{
+    grid-template-columns:
+      var(--md-sidebar-width)
+      minmax(0, 1fr)
+      var(--md-sidebar-width)
+    !important;
+  }
+
+  /* Sticky + eigener Scrollbereich */
+  .md-sidebar--primary{
+    position: sticky !important;
+    top:    calc(var(--nand-sticky-top) + var(--sticky-safety)) !important;
+    height: calc(100vh - (var(--nand-sticky-top) + var(--sticky-safety))) !important;
+    overflow: auto !important;
+    align-self: start;
+    margin-left: var(--sidebar-edge-shift) !important;
+
+    inline-size: var(--md-sidebar-width) !important;
+    width:       var(--md-sidebar-width) !important;
+    flex: 0 0    var(--md-sidebar-width) !important;
+    max-width:   none !important;
+  }
+  .md-sidebar--primary > *{
+    inline-size: 100% !important;
+    max-width:  none !important;
+  }
+
+  /* Kopf der Navigation ausblenden */
+  .md-sidebar--primary .md-nav__title{ display: none !important; }
+
+  /* Umbruch-Logik */
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link .md-ellipsis,
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link .md-ellipsis{
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  html.aa-enlarged .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link .md-ellipsis,
+  html.aa-enlarged .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link .md-ellipsis{
+    white-space: normal !important;
+    overflow: hidden !important;
+    display: -webkit-box !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: 2 !important;
+    text-overflow: ellipsis !important;
+  }
+
+  /* Unterlisten etwas dichter */
+  .md-sidebar--primary .md-nav__list .md-nav__list{ margin-left: .6rem; }
+
+  /* ------------------------------------------------------------------
+     FARBREGELN
+     ------------------------------------------------------------------ */
+
+  /* Basis: keine ungeplanten Hintergründe */
+  .md-sidebar--primary .md-nav__link{ background: none !important; color: inherit; }
+
+  /* A) TOP-LEVEL SEKTIONEN (aufklappbar) → volle Pille auf Hover & Active */
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link:hover,
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link:hover{
+    background: var(--section-bg) !important;
+    color: var(--section-fg) !important;
+    border-radius: var(--nav-link-radius);
+    padding: var(--nav-link-pad-y) var(--nav-link-pad-x);
+  }
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--section.md-nav__item--active > .md-nav__link,
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--nested.md-nav__item--active  > .md-nav__link,
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link[aria-current],
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link[aria-current]{
+    background: var(--section-bg) !important;
+    color: var(--section-fg) !important;
+    border-radius: var(--nav-link-radius);
+    padding: var(--nav-link-pad-y) var(--nav-link-pad-x);
+    font-weight: 700 !important;
+  }
+
+  /* B) VERSCHACHTELTE GRUPPEN (Level 2+ als Gruppenheader) → dunkler Ton */
+  .md-sidebar--primary
+  .md-nav .md-nav__list .md-nav__list > .md-nav__item--nested > .md-nav__link:hover{
+    background: var(--section-bg--nested) !important;
+    color: var(--section-fg) !important;
+  }
+  .md-sidebar--primary
+  .md-nav .md-nav__list .md-nav__list > .md-nav__item--nested.md-nav__item--active > .md-nav__link,
+  .md-sidebar--primary
+  .md-nav .md-nav__list .md-nav__list > .md-nav__item--nested > .md-nav__link[aria-current]{
+    background: var(--section-bg--nested) !important;
+    color: var(--section-fg) !important;
+    font-weight: 700 !important;
+  }
+
+  /* C) TOP-LEVEL OHNE UNTERMENÜ (normaler Link direkt unter Root)
+        → behandeln wie Sektion: Pille auf Hover & Active */
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested) > .md-nav__link:hover{
+    background: var(--section-bg) !important;
+    color: var(--section-fg) !important;
+    border-radius: var(--nav-link-radius);
+    padding: var(--nav-link-pad-y) var(--nav-link-pad-x);
+  }
+  .md-sidebar--primary
+  .md-nav > .md-nav__list > .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested) > .md-nav__link[aria-current]{
+    background: var(--section-bg) !important;
+    color: var(--section-fg) !important;
+    border-radius: var(--nav-link-radius);
+    padding: var(--nav-link-pad-y) var(--nav-link-pad-x);
+    font-weight: 700 !important;
+  }
+
+  /* D) EINFACHE TEXTLINKS IN UNTERMENÜS (Level 2+ ohne Gruppenstatus)
+        → NIE Pille, nur Text färben (Hover/Active) */
+  /* harter Reset gegen Material-Defaults */
+  .md-sidebar--primary
+  .md-nav__list .md-nav__list .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested) > .md-nav__link{
+    background: none !important;
+  }
+  .md-sidebar--primary
+  .md-nav__list .md-nav__list .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested) > .md-nav__link:hover{
+    background: none !important;
+  }
+  .md-sidebar--primary
+  .md-nav__list .md-nav__list .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested) > .md-nav__link[aria-current]{
+    background: none !important;
+  }
+  /* nur Text einfärben */
+  .md-sidebar--primary
+  .md-nav__list .md-nav__list .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested)
+  > .md-nav__link:hover .md-ellipsis{
+    color: var(--link-accent) !important;
+    font-weight: 600;
+  }
+  .md-sidebar--primary
+  .md-nav__list .md-nav__list .md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested)
+  > .md-nav__link[aria-current] .md-ellipsis{
+    color: var(--link-accent) !important;
+    font-weight: 700;
+  }
+}
+

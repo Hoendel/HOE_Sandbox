@@ -1,0 +1,178 @@
+/* =======================================================================
+   MARS THEME – Farben + Menü-States
+   -----------------------------------------------------------------------
+   ✔ Marsrot für Header, aktive Pillen & Akzentzustände
+   ✔ Dunklere Mars-Nuance für aktive verschachtelte Gruppen (Level 2+)
+   ✔ Kometensilber als dezenter Hover für Top-Level-Texte
+   ✔ Normale Textlinks (keine Gruppen) werden bei Hover/Active marsrot
+   ======================================================================= */
+
+
+/* -----------------------------------------------------------------------
+   0) FARBTOKENS je Farbschema (hell = "default", dunkel = "slate")
+   - Passe hier nur die HEX-Werte an; alles unten referenziert Variablen.
+   - Farblegende (nur Kommentar):
+     ● Marsrot (Primär)             #B04F34
+     ● Marsrot hell (Hover-Mix)     #C65B3C
+     ● Marsrot dunkel (Gruppen aktiv)#8E3F2A
+     ● Kometen-Silber (Akzent)      #8F9CA3
+   ----------------------------------------------------------------------- */
+
+/* Helles Schema */
+[data-md-color-scheme="default"]{
+  /* Primärfarbe – bestimmt Header, aktive Top-Level-Pillen, TOC-Titel */
+  --md-primary-fg-color:           #B04F34;  /* Marsrot ● */
+
+  /* Hellere/dunklere Nuance – für feine States (Suche, Untergruppen) */
+  --md-primary-fg-color--light:    #C65B3C;  /* Marsrot hell ● */
+  --md-primary-fg-color--dark:     #8E3F2A;  /* Marsrot dunkel ● */
+
+  /* Akzentfarbe – dezente Hoverfarbe für Top-Level-Text */
+  --md-accent-fg-color:            #8F9CA3;  /* Kometen-Silber ● */
+
+  /* Lesefarben auf Primärflächen (Kontrast) */
+  --on-main-strong: #000;                    /* Text/Icons auf Marsrot helles Schema */
+}
+
+/* Dunkles Schema */
+[data-md-color-scheme="slate"]{
+  --md-primary-fg-color:           #B04F34;  /* Marsrot ● */
+  --md-primary-fg-color--light:    #D16651;  /* etwas heller für Dark-UI */
+  --md-primary-fg-color--dark:     #8E3F2A;  /* Marsrot dunkel ● */
+  --md-accent-fg-color:            #B0BEC5;  /* Kometen-Silber für Dark-UI */
+
+  --on-main-strong: #fff;                    /* Text/Icons auf Marsrot dunkles Schema */
+}
+
+
+/* -----------------------------------------------------------------------
+   1) HEADER/TABS/FOOTER – Grundflächen in Marsrot füllen
+   - Ändere nur --md-primary-fg-color, wenn dir der Ton nicht zusagt.
+   ----------------------------------------------------------------------- */
+.md-header,
+.md-tabs,
+.md-footer{
+  background: var(--md-primary-fg-color) !important;  /* Fläche Marsrot */
+}
+
+/* Header-Titel, Buttons, Tabs → kontrastreiche Schriftfarbe */
+.md-header .md-header__title,
+.md-header .md-header__title .md-ellipsis,
+.md-header a,
+.md-header .md-header__button,
+.md-header .md-header__button .md-icon,
+.md-tabs__link,
+.md-tabs__link .md-ellipsis,
+.md-tabs__link .md-icon{
+  color: var(--on-main-strong) !important;            /* Text/Icons auf Marsrot */
+  fill: currentColor !important;
+  stroke: currentColor !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   2) PRIMARY (linke Sidebar) – Pillen, Hover & Active
+   ----------------------------------------------------------------------- */
+
+/* 2.1 TOP-LEVEL (ausklappbare Sektionen) – HOVER: nur Text in Kometen-Silber
+   - Ziel: dezenter Hover (keine Füllung), aber klare Rückmeldung.
+   - Anpassen: --md-accent-fg-color ändern. */
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link:hover,
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link:hover{
+  color: var(--md-accent-fg-color) !important;         /* Text silbrig */
+}
+
+/* 2.2 TOP-LEVEL – ACTIVE: Pille voll in Marsrot füllen
+   - Greift sowohl für „geöffnete Sektion“ als auch „aktueller Index“.
+   - Anpassen: --md-primary-fg-color (Fläche), --on-main-strong (Text). */
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--section.md-nav__item--active > .md-nav__link,
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--nested.md-nav__item--active  > .md-nav__link,
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link[aria-current],
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link[aria-current]{
+  background: var(--md-primary-fg-color) !important;   /* Fläche Marsrot */
+  color: var(--on-main-strong) !important;             /* Text/Icons kontrastreich */
+}
+
+/* 2.3 VERSCHACHTELTE GRUPPEN (Level 2+) – ACTIVE: dunkles Marsrot
+   - Beispiele: „Fahrzeuge & Waffen“, „Waffen“ innerhalb „Technik“.
+   - Anpassen: --md-primary-fg-color--dark. */
+.md-sidebar--primary
+.md-nav__list .md-nav__list > .md-nav__item--nested.md-nav__item--active > .md-nav__link,
+.md-sidebar--primary
+.md-nav__list .md-nav__list > .md-nav__item--nested > .md-nav__link[aria-current]{
+  background: var(--md-primary-fg-color--dark) !important; /* dunkle Füllung */
+  color: var(--on-main-strong) !important;                  /* klare Lesefarbe */
+}
+
+/* 2.4 NORMALE TEXTLINKS (keine Gruppen) – Hover/Active: Marsrot Text
+   - Das betrifft Einträge, die direkt zu Seiten führen.
+   - Anpassen: --md-primary-fg-color. */
+.md-sidebar--primary
+.md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested)
+> .md-nav__link:hover .md-ellipsis{
+  color: var(--md-primary-fg-color) !important;            /* Hover: Text marsrot */
+}
+.md-sidebar--primary
+.md-nav__item:not(.md-nav__item--section):not(.md-nav__item--nested)
+> .md-nav__link[aria-current] .md-ellipsis{
+  color: var(--md-primary-fg-color) !important;            /* Active: Text marsrot */
+  font-weight: 700 !important;                             /* optional: betonen */
+}
+
+
+/* -----------------------------------------------------------------------
+   3) SECONDARY (rechte Sidebar / TOC)
+   ----------------------------------------------------------------------- */
+
+/* 3.1 TOC-TITEL als Pille voll Marsrot
+   - Anpassen: --md-primary-fg-color (Fläche), --on-main-strong (Text). */
+.md-nav--secondary .md-nav__title{
+  background: var(--md-primary-fg-color) !important;      /* Fläche Marsrot */
+  color: var(--on-main-strong) !important;                /* Schrift kontrastreich */
+  border-radius: 12px !important;                         /* optisch wie links */
+}
+
+/* 3.2 TOC-EINTRÄGE – nur Text färben (keine Füllung)
+   - Hover/Active: Marsrot für gute Wiedererkennung.
+   - Anpassen: --md-primary-fg-color. */
+.md-nav--secondary .md-nav__link:hover .md-ellipsis{
+  color: var(--md-primary-fg-color) !important;           /* Hover: Text marsrot */
+}
+.md-nav--secondary .md-nav__item--active  > .md-nav__link .md-ellipsis,
+.md-nav--secondary .md-nav__link--active .md-ellipsis,
+.md-nav--secondary .md-nav__link[aria-current] .md-ellipsis{
+  color: var(--md-primary-fg-color) !important;           /* Active: Text marsrot */
+  font-weight: 700 !important;
+}
+
+
+/* -----------------------------------------------------------------------
+   4) FEINSCHLIFF (optional) – sanfter Hover-Mix für Top-Level-Pillen
+   - Wenn du für Hover doch eine leichte Fläche willst, aktiviere das:
+   - Tipp: den Alpha-Wert (12%) ggf. erhöhen/vermindern.
+   ----------------------------------------------------------------------- */
+/*
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--section > .md-nav__link:hover,
+.md-sidebar--primary
+.md-nav > .md-nav__list > .md-nav__item--nested  > .md-nav__link:hover{
+  background: color-mix(in srgb,
+               var(--md-primary-fg-color) 12%, transparent) !important;
+}
+*/
+
+/* Safety: Accent-Farbe IMMER auf unsere Werte ziehen (verhindert Blau) */
+:root,
+[data-md-color-scheme="default"],
+[data-md-color-scheme="slate"]{
+  /* dein Kometen-Silber als Accent */
+  --md-accent-fg-color: #8F9CA3 !important;
+  /* Theme nutzt oft eine transparente Mischung für Hover – hier definieren wir sie selbst */
+  --md-accent-fg-color--transparent: color-mix(in srgb, var(--md-accent-fg-color) 18%, transparent) !important;
+}

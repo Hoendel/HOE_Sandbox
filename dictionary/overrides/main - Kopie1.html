@@ -1,0 +1,21 @@
+{# overrides/main.html
+   Version: 2025-09-14 00:10 Europe/Berlin
+   Zweck:
+   - Banner ohne Dismiss-Button (also kein "gelesen ×")
+   - Inhalt des Banners kommt aus config.extra.announcement
+   - Keine weitere Logik: Persistenz/Close ist vollständig entfernt
+#}
+
+{% extends "base.html" %}
+
+{# Material bindet diesen Block im Header-Bereich ein #}
+{% block announce %}
+  {% if config.extra and config.extra.announcement %}
+    <div class="md-banner" role="region" aria-label="Ankündigung">
+      <div class="md-banner__inner">
+        {{ config.extra.announcement }}
+      </div>
+      {# Wichtig: KEIN Close-/Dismiss-Element! #}
+    </div>
+  {% endif %}
+{% endblock %}

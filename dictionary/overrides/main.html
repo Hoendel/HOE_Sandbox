@@ -1,0 +1,13 @@
+<!-- Fixer Banner (ohne Dismiss), Text zentriert.
+     Typo: Wir stylen separat in CSS, damit keine Header-Layouts reinfunken. -->
+{% extends "base.html" %}
+
+{% block announce %}
+  {% if config.extra and config.extra.announcement %}
+    <div class="md-banner" data-nand-fixed-banner role="region" aria-label="Ankündigung">
+      <div class="md-banner__inner">
+        <span class="nand-banner-typo">{{ config.extra.announcement }}</span>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
